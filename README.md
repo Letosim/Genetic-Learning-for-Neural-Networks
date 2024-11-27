@@ -376,3 +376,55 @@ public void RunForward(float[] input)
             neurodes[neurodes.Length - 1][n].Delta = Mathf.InverseLerp(min, max, neurodes[neurodes.Length - 1][n].Delta);//normalize....
     }
 }
+
+
+  float maxValueLastDrawStage = 1;
+  int drawStepCount = 0;
+  float distanceX = 5f;
+  float distanceZ = 1f;
+
+  public void DrawConnections()
+  {
+      for (int i = 0; i < neurodes.Length; i++)
+          for (int n = 0; n < neurodes[i].Length; n++)
+          {
+              Vector3 position = new Vector3(i * distanceX, 0, n * distanceZ - (neurodes[i].Length / 2 * distanceZ));
+              Vector3 positionUp = new Vector3(position.x, neurodes[i][n].Delta * 3f, position.z);
+              Debug.DrawLine(position, positionUp, Color.blue);
+              
+              if (i == 0)
+                  continue;
+
+              for (int k = 0; k < neurodes[i - 1].Length; k++)
+              {
+                  float c = neurodes[i][n].Weight[k] * neurodes[i - 1][k].Delta;
+                  if (c <= 0)
+                      c *= -1;
+                  if (c > 1)
+                      c = 1;
+            
+                  if (maxValueLastDrawStage < c)
+                      maxValueLastDrawStage = c;
+
+                  c /= maxValueLastDrawStage;
+
+                  Vector3 positionB = new Vector3((i - 1) * distanceX, 0, k * distanceZ - (neurodes[i - 1].Length / 2 * distanceZ));
+                  Debug.DrawLine(position, positionB,new Color(c,c,c));
+              }
+          }
+
+      for (int i = 0; i < shortMemoryCount; i++)
+      {
+          Vector3 position = new Vector3(0 * distanceX, 0, (shortMemoryEntraceStartIndex + i) * distanceZ - (neurodes[0].Length / 2 * distanceZ));
+          Vector3 positionB = new Vector3((neurodes.Length - 1) * distanceX, 0, (shortMemoryExitStartIndex + i) * distanceZ - (neurodes[neurodes.Length - 1].Length / 2 * distanceZ));
+          Debug.DrawLine(position, positionB, Color.green);
+      }
+
+      if (drawStepCount == 300)
+      {
+          drawStepCount = 0;
+          maxValueLastDrawStage = 1;
+      }
+
+      drawStepCount++;
+  }
