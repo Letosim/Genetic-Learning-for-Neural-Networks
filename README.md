@@ -1499,7 +1499,7 @@ else
 
 "ChatGPT"
 
-public override void RunForward(Neurode[] parentLayer, bool[] saveGate)
+public override void RunForward(Neurode[] parentLayer, bool[] saveGate)    //!!!(####) ################!!!
 {
     int initiationChromosomeCount = 10;
     int memoryChromosomeCount = 10;
