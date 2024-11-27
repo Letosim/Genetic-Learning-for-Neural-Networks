@@ -1522,7 +1522,7 @@ public override void RunForward(Neurode[] parentLayer, bool[] saveGate)
             index++;
         }
 
-        // If activation value 2 is positive, accumulate memoryChromosomeCount
+        // If activation value 1 is positive, accumulate memoryChromosomeCount
         if (System.Math.Tanh(activationValue[s]) > 0)
         {
             for (int i = 0; i < memoryChromosomeCount; i++)
@@ -1534,7 +1534,7 @@ public override void RunForward(Neurode[] parentLayer, bool[] saveGate)
             }
         }
 
-        // If activation value 3 is positive, accumulate chromosomeCount
+        // If activation value 2 is positive, accumulate chromosomeCount
         if (System.Math.Tanh(activationValue[s]) > 0)
         {
             for (int i = 0; i < chromosomeCount; i++)
