@@ -1,10 +1,6 @@
 # NewRepo
 
 
-
-"just in case"
-
-
   private int startIndexSecondGate;
   private NeurodeType type;
 
@@ -149,7 +145,6 @@
 
 
 
-"also just in case"
 
   public void RunForward(float[] input)
   {
@@ -197,7 +192,6 @@
   }
 
 
-"sorry"
 
  public NeuralNetwork(NetworkLayout[] networkLayout,int seed)
  {
