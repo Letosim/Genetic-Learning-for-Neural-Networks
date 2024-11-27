@@ -1534,7 +1534,7 @@ public override void RunForward(Neurode[] parentLayer, bool[] saveGate)
             }
         }
 
-        // If activation value 3 is still positive, accumulate chromosomeCount
+        // If activation value 3 is positive, accumulate chromosomeCount
         if (System.Math.Tanh(activationValue[s]) > 0)
         {
             for (int i = 0; i < chromosomeCount; i++)
