@@ -66,7 +66,7 @@
             {
                 for (int i = 0; i < memoryChromosomeCount; i++)
                 {
-                    activationValue *= Chromosones[n][index];
+                    activationValue *= Chromosones[n][index];//individual for each neuron!?
                     index++;
                 }
             }
@@ -80,7 +80,7 @@
             {
                 for (int i = 0; i < chromosomeCount; i++)
                 {
-                    activationValue *= Chromosones[n][index];
+                    activationValue *= Chromosones[n][index];//individual for each neuron!?
                     index++;
                 }
 
