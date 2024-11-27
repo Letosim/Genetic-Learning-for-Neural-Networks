@@ -1326,5 +1326,5 @@ public class NetworkLayout
      else
          delta = 0;
              else if (saveGate)
-         delta = activationValue;
+                 delta = activationValue;
  }
