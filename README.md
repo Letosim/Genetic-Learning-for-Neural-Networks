@@ -1559,6 +1559,6 @@ public override void RunForward(Neurode[] parentLayer, bool[] saveGate)
         accumulatedDelta += delta;
     }
 
-    // Average delta across all saveGate
+    // Average delta across all saveGate's
     delta = accumulatedDelta / (float)saveGate.Length;
 }
