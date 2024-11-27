@@ -148,3 +148,50 @@
   }
 
 
+
+"also just in case"
+
+  public void RunForward(float[] input)
+  {
+      for (int n = 0; n < neurodes[0].Length - shortMemoryCount; n++)
+      {
+          neurodes[0][n].Delta = input[n];// Random.Range(-1,2);
+      }
+
+      for (int i = 0; i < shortMemoryCount; i++)
+          neurodes[0][shortMemoryEntraceStartIndex + i].Delta = neurodes[neurodes.Length - 1][shortMemoryExitStartIndex + i].Delta;
+
+      for (int i = 1; i < neurodes.Length; i++)
+      {
+          for (int n = 0; n < neurodes[i].Length; n++)
+              neurodes[i][n].RunForward(neurodes[i - 1]);
+      }
+
+      if (clampValues)
+      {
+          float min = 5000;
+          float max = -5000;
+
+          for (int n = 0; n < neurodes[neurodes.Length - 1].Length; n++)
+          {
+              if (neurodes[neurodes.Length - 1][n].Delta < min)
+                  min = neurodes[neurodes.Length - 1][n].Delta;
+              if (neurodes[neurodes.Length - 1][n].Delta > max)
+                  max = neurodes[neurodes.Length - 1][n].Delta;
+          }
+
+          if(min < 0)
+          {
+              if (min > -.45)
+                  min -= .2f;
+          }
+          else
+          {
+              if (min > .05)
+                  min -= .2f;
+          }
+
+          for (int n = 0; n < neurodes[neurodes.Length - 1].Length; n++)
+              neurodes[neurodes.Length - 1][n].Delta = Mathf.InverseLerp(min, max, neurodes[neurodes.Length - 1][n].Delta);
+      }
+  }
