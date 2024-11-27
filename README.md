@@ -195,3 +195,139 @@
               neurodes[neurodes.Length - 1][n].Delta = Mathf.InverseLerp(min, max, neurodes[neurodes.Length - 1][n].Delta);
       }
   }
+
+
+"sorry"
+
+ public NeuralNetwork(NetworkLayout[] networkLayout,int seed)
+ {
+     randomGen = new System.Random(seed);
+
+     for (int i = 0; i < networkLayout.Length; i++)
+         if (networkLayout[i].type == Neurode.NeurodeType.ShortMemoryNeurode)
+             shortMemoryCount += networkLayout[i].count;
+
+     for (int i = 0; i < networkLayout.Length; i++)
+         if (networkLayout[i].type == Neurode.NeurodeType.Seed)
+             seedCount += networkLayout[i].count;
+
+     if (seedCount != 0)
+     {
+         if (seedCount <= 3)
+             seedCount = 3;
+
+         bin = new int[seedCount];
+
+         bin[0] = 0;
+         bin[1] = 1;
+         bin[2] = 2;
+     }
+     for (int i = 3; i < seedCount; i ++)
+     {
+         bin[i] = bin[i-1] * 2;
+     }
+
+     int length = 0;
+
+     for (int i = 0; i < networkLayout.Length; i++)//highest layer count from the sets
+     {
+         if (length < networkLayout[i].layout.Length)
+             length = networkLayout[i].layout.Length;
+     }
+
+     neurodes = new Neurode[length][];
+
+     for (int i = 0; i < length; i++)//calulate the length of each layer
+     {
+         int layerLength = 0;
+
+         for (int n = 0; n < networkLayout.Length; n++)
+         {
+             if (networkLayout[n].layout.Length <= i)
+                 continue;
+             layerLength += networkLayout[n].layout[i];
+
+         }
+
+         if (i == 0 || i == length - 1)// loop input and out put layer for memory
+         {
+             if (i == 0)
+                 shortMemoryEntraceStartIndex = layerLength;
+             if (i == length - 1)
+                 shortMemoryExitStartIndex = layerLength;
+
+             layerLength += shortMemoryCount;
+
+             if (i == 0)
+                 seedEntraceStartIndex = layerLength;
+             if (i == length - 1)
+                 seedExitStartIndex = layerLength;
+
+             layerLength += seedCount;
+
+         }
+
+         neurodes[i] = new Neurode[layerLength];
+     }
+
+     for (int i = 0; i < length; i++)//initialise layers
+     {
+         int d = 0;
+
+         for (int n = 0; n < networkLayout.Length; n++)
+         {
+             if (networkLayout[n].layout.Length <= i)
+                 continue; 
+             
+             for (int k = 0; k < networkLayout[n].layout[i]; k++)
+             { 
+                 if (i == 0)
+                 {
+                     if (networkLayout[n].type == Neurode.NeurodeType.ReLuNeurode)
+                         neurodes[0][d] = new ReLuNeurode(d, 0, randomGen, Neurode.NeurodeType.ReLuNeurode);
+                     if (networkLayout[n].type == Neurode.NeurodeType.TanNeurode)
+                         neurodes[0][d] = new TanNeurode(d, 0, randomGen, Neurode.NeurodeType.TanNeurode);
+                     if (networkLayout[n].type == Neurode.NeurodeType.MemoryNeurode)
+                         neurodes[0][d] = new MemoryNeurode(d, 0, randomGen, Neurode.NeurodeType.MemoryNeurode);
+                     if (networkLayout[n].type == Neurode.NeurodeType.SigmoidNeurode)
+                         neurodes[0][d] = new SigmoidNeurode(d, 0, randomGen, Neurode.NeurodeType.SigmoidNeurode);
+                 }
+                 else
+                 {
+                     if (networkLayout[n].type == Neurode.NeurodeType.ReLuNeurode)
+                         neurodes[i][d] = new ReLuNeurode(d, neurodes[i - 1].Length, randomGen, Neurode.NeurodeType.ReLuNeurode);
+                     if (networkLayout[n].type == Neurode.NeurodeType.TanNeurode)
+                         neurodes[i][d] = new TanNeurode(d, neurodes[i - 1].Length, randomGen, Neurode.NeurodeType.TanNeurode);
+                     if (networkLayout[n].type == Neurode.NeurodeType.MemoryNeurode)
+                         neurodes[i][d] = new MemoryNeurode(d, neurodes[i - 1].Length, randomGen, Neurode.NeurodeType.MemoryNeurode);
+                     if (networkLayout[n].type == Neurode.NeurodeType.SigmoidNeurode)
+                         neurodes[i][d] = new SigmoidNeurode(d, neurodes[i - 1].Length, randomGen, Neurode.NeurodeType.SigmoidNeurode);
+                 }
+                 d++;
+             }
+         }
+         //-----------------------------------------------------------------------------------------------------------------------------!!!!!!
+         if (i == 0 || i == length - 1)
+         {
+             for (int k = 0; k < shortMemoryCount; k++)
+             {
+                 if (i == 0)
+                     neurodes[i][d] = new TanNeurode(d, 0, randomGen, Neurode.NeurodeType.TanNeurode);
+                 else
+                     neurodes[i][d] = new TanNeurode(d, neurodes[i - 1].Length, randomGen, Neurode.NeurodeType.TanNeurode);
+                 d++;
+             }
+
+             for (int k = 0; k < seedCount; k++)
+             {
+                 if (i == 0)
+                     neurodes[i][d] = new TanNeurode(d, 0, randomGen, Neurode.NeurodeType.ReLuNeurode);
+                 else
+                     neurodes[i][d] = new TanNeurode(d, neurodes[i - 1].Length, randomGen, Neurode.NeurodeType.ReLuNeurode);
+                 d++;
+             }
+
+         }
+         //-------------------------------------------------------------------------------------------------------------------------------------
+     }
+ }
