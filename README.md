@@ -157,8 +157,7 @@
            {
                for (int i = 0; i < memoryChromosomeCount; i++)
                {
-                   activationValue *= Chromosones[n][index];//GateValue
-                   index++;
+                   activationValue *= Chromosones[n][i];//GateValue
                }
            }
        }
@@ -171,8 +170,7 @@
            {
                for (int i = 0; i < memoryChromosomeCount; i++)
                {
-                   activationValue *= Chromosones[n][index];
-                   index++;
+                   activationValue *= Chromosones[n][i];
                }
 
                delta = (float)System.Math.Tanh(activationValue);
