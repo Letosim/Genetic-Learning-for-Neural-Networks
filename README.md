@@ -1434,3 +1434,66 @@ else
 
        //  parentLayer[i].Delta * parentLayer[i].Delta savegate[]??????????????????????
    }
+
+
+//#############################################################################################################################
+
+   public override void RunForward(Neurode[] parentLayer, bool[] saveGate)// savegate[]??????????????????????
+   {
+       int initiationChromosomeCount = 10;
+       int memoryChromosomeCount = 10;
+       int chromosomeCount = 30;
+
+       float[] activationValue = new float[saveGate.Length];//[]??????????????????????????
+
+       float lesGo;
+
+       for (int s = 0; s < saveGate.Length; s++)
+       {
+           int index = 0;
+
+           activationValue[s] = 0;
+
+           for (int i = 0; i < initiationChromosomeCount; i++)
+           {
+               for (int n = 0; n < parentLayer.Length; n++)
+                   activationValue[s] += parentLayer[i].Delta * Chromosones[n][index];
+
+               index++;
+           }
+
+           if (System.Math.Tanh(activationValue[s]) > 0)
+           {
+               for (int i = 0; i < memoryChromosomeCount; i++)
+               {
+                   for (int n = 0; n < parentLayer.Length; n++)
+                       activationValue[s] += parentLayer[i].Delta * Chromosones[n][index];
+
+                   index++;
+               }
+           }
+
+           if (System.Math.Tanh(activationValue[s]) > 0)
+           {
+               for (int i = 0; i < chromosomeCount; i++)
+               {
+                   for (int n = 0; n < parentLayer.Length; n++)
+                       activationValue[s] += parentLayer[i].Delta * Chromosones[n][index];
+
+                   index++;
+               }
+
+               delta = (float)System.Math.Tanh(activationValue[s]);
+           }
+           else
+               if (saveGate)//[i] == true
+                   delta = activationValue;//+=
+               else
+                   delta = 0;
+
+           lesGo += delta;
+       }
+
+       delta = lesGo;
+   }
+
