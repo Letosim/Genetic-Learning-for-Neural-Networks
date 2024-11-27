@@ -1323,8 +1323,8 @@ public class NetworkLayout
 
          delta = (float)System.Math.Tanh(activationValue);
      }
-     else
-         delta = 0;
-             else if (saveGate)
-                 delta = activationValue;
+     else if (saveGate)
+        delta = activationValue;
+            else 
+             delta = 0;
  }
