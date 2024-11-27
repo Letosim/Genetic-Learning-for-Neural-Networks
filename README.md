@@ -768,7 +768,7 @@ public class NetworkManager
         CalulateTopNetworks();
         MergeNetworks(mergeType);
         trainingIsRunning = false;
-        Debug.Log("Training End");
+        Debug.Log("Reptoloid's-Net");
     }
 
     public void MergeNetworks(Neurode.MergeType mergeType)
