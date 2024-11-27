@@ -1382,3 +1382,55 @@ public class NetworkLayout
             delta = 0;
 
     }
+
+   public override void RunForward(Neurode[] parentLayer, bool saveGate)// savegate[]??????????????????????
+   {
+       int initiationChromosomeCount = 10;
+       int memoryChromosomeCount = 10;
+       int chromosomeCount = 30;
+
+       float activationValue = 0;//[]??????????????????????????
+       int index = 0;
+
+       activationValue = 0;
+
+       for (int i = 0; i < initiationChromosomeCount; i++)
+       {
+           for (int n = 0; n < parentLayer.Length; n++)
+               activationValue += parentLayer[i].Delta * Chromosones[n][index];
+
+           index++;
+       }
+
+       if (System.Math.Tanh(activationValue) > 0)
+       {
+           for (int i = 0; i < memoryChromosomeCount; i++)
+           {
+               for (int n = 0; n < parentLayer.Length; n++)
+                   activationValue += parentLayer[i].Delta * Chromosones[n][index];
+
+               index++;
+           }
+       }
+
+       if (System.Math.Tanh(activationValue) > 0)
+       {
+           for (int i = 0; i < chromosomeCount; i++)
+           {
+               for (int n = 0; n < parentLayer.Length; n++)
+                   activationValue += parentLayer[i].Delta * Chromosones[n][index];
+
+               index++;
+           }
+
+           delta = (float)System.Math.Tanh(activationValue);
+       }
+       else
+           if (saveGate)
+                   delta = activationValue;
+               else
+                   delta = 0;
+
+
+       //  parentLayer[i].Delta * parentLayer[i].Delta savegate[]??????????????????????
+   }
