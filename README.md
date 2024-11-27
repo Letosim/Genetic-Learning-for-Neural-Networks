@@ -1,6 +1,6 @@
 # NewRepo
 
-//fitness == playerfunn :)
+//fitness = playerfunn :)
 //
 //
 //
