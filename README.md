@@ -1389,47 +1389,47 @@ public class NetworkLayout
        int memoryChromosomeCount = 10;
        int chromosomeCount = 30;
 
-       float activationValue = 0;//[]??????????????????????????
-       int index = 0;
+     float activationValue = 0;//[]??????????????????????????
+int index = 0;
 
-       activationValue = 0;
+activationValue = 0;
 
-       for (int i = 0; i < initiationChromosomeCount; i++)
-       {
-           for (int n = 0; n < parentLayer.Length; n++)
-               activationValue += parentLayer[i].Delta * Chromosones[n][index];
+for (int i = 0; i < initiationChromosomeCount; i++)
+{
+    for (int n = 0; n < parentLayer.Length; n++)
+        activationValue += parentLayer[i].Delta * Chromosones[n][index];
 
-           index++;
-       }
+    index++;
+}
 
-       if (System.Math.Tanh(activationValue) > 0)
-       {
-           for (int i = 0; i < memoryChromosomeCount; i++)
-           {
-               for (int n = 0; n < parentLayer.Length; n++)
-                   activationValue += parentLayer[i].Delta * Chromosones[n][index];
+if (System.Math.Tanh(activationValue) > 0)
+{
+    for (int i = 0; i < memoryChromosomeCount; i++)
+    {
+        for (int n = 0; n < parentLayer.Length; n++)
+            activationValue += parentLayer[i].Delta * Chromosones[n][index];
 
-               index++;
-           }
-       }
+        index++;
+    }
+}
 
-       if (System.Math.Tanh(activationValue) > 0)
-       {
-           for (int i = 0; i < chromosomeCount; i++)
-           {
-               for (int n = 0; n < parentLayer.Length; n++)
-                   activationValue += parentLayer[i].Delta * Chromosones[n][index];
+if (System.Math.Tanh(activationValue) > 0)
+{
+    for (int i = 0; i < chromosomeCount; i++)
+    {
+        for (int n = 0; n < parentLayer.Length; n++)
+            activationValue += parentLayer[i].Delta * Chromosones[n][index];
 
-               index++;
-           }
+        index++;
+    }
 
-           delta = (float)System.Math.Tanh(activationValue);
-       }
-       else
-           if (saveGate)
-                   delta = activationValue;
-               else
-                   delta = 0;
+    delta = (float)System.Math.Tanh(activationValue);
+}
+else
+    if (saveGate)//[i] == true
+            delta = activationValue;//+=
+        else
+            delta = 0;
 
 
        //  parentLayer[i].Delta * parentLayer[i].Delta savegate[]??????????????????????
