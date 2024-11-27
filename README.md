@@ -1486,10 +1486,10 @@ else
                delta = (float)System.Math.Tanh(activationValue[s]);
            }
            else
-               if (saveGate)//[i] == true
-                   delta = activationValue;//+=
-               else
-                   delta = 0;
+             if (saveGate[i])
+                 delta = activationValue[i];
+             else
+                 delta = 0;
 
            lesGo += delta;
        }
