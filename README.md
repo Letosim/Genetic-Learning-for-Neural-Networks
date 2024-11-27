@@ -94,7 +94,7 @@ public abstract class UnitNN
             {
                 for (int i = 0; i < memoryChromosomeCount; i++)
                 {
-                    activationValue *= Chromosones[n][index];//individual for each neuron!?
+                    activationValue *= Chromosones[n][index];//individual for each neuron!? chromosomeCount
                     index++;
                 }
             }
@@ -108,7 +108,7 @@ public abstract class UnitNN
             {
                 for (int i = 0; i < chromosomeCount; i++)
                 {
-                    activationValue *= Chromosones[n][index];//individual for each neuron!?
+                    activationValue *= Chromosones[n][index];//individual for each neuron!? chromosomeCount
                     index++;
                 }
 
