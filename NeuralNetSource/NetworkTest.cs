@@ -21,6 +21,9 @@ public class NetworkTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+
+
         NetworkLayout[] networkLayout = new NetworkLayout[4];   // new NetworkLayout(NetworkLayout.NeurodeType.TanNeurode,new int[] { 3, 6, 6, 3 });
                                                                 //networkLayout[0] = new NetworkLayout(Neurode.NeurodeType.TanNeurode, new int[] {      0, 0, 0 , 0 , 0 });
                                                                 //networkLayout[1] = new NetworkLayout(Neurode.NeurodeType.TanNeurode, new int[] {      9, 0, 0, 0 , 5 });
@@ -45,7 +48,7 @@ public class NetworkTest : MonoBehaviour
         //network = new NeuralNetwork(new int[] { 6, 12, 12, 6 }); 
         //network = new NeuralNetwork(networkLayout);
 
-
+        
 
 
         //NetworkLayout[] networkLayout = new NetworkLayout[4];   // new NetworkLayout(NetworkLayout.NeurodeType.TanNeurode,new int[] { 3, 6, 6, 3 });
