@@ -27,8 +27,7 @@ public class CNeurode : Neurode
     public override float[] Bias { get { return bias; } set { bias = value; } }
     public override float[] Weight { get { return weight; } set { weight = value; } }
 
-    public override float[][] Chromosomes { get { return chromosomes; } set { chromosomes = value; } }
-    //public override float[][][] Chromosomes { get { return chromosomes; } set { chromosomes = value; } }    
+    public override float[][] Chromosomes { get { return chromosomes; } set { chromosomes = value; } }//chromosomes[n][length * 2 - index]       parentLayer[i].Delta * chromosomes[n][index] + chromosomes[n][length - index];   
 
     public override bool IsMemoryNeurode { get { return isMemoryNeurode; } set { isMemoryNeurode = value; } }    
 
