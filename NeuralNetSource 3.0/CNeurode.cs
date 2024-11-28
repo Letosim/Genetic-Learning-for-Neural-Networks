@@ -118,7 +118,7 @@ public class CNeurode : Neurode
             for (int i = 0; i < initiationChromosomeCount; i++)
             {
                 for (int n = 0; n < parentLayer.Length; n++)
-                    activationValue += parentLayer[i].Delta * chromosomes[n][index];
+                    activationValue += parentLayer[i].Delta * chromosomes[n][index];//chromosomes[n][length * 2 - index]       parentLayer[i].Delta * chromosomes[n][index] + chromosomes[n][length - index];   
 
                 index++;
             }
