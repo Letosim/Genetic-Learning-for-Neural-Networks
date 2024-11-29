@@ -924,3 +924,10 @@ public class CNeurode : Neurode
 
 //        k = networklayers       all   ||   backwards  ||    forwards    ||   booth  || (??  >   logic <3)
 //    public override float[][,] DeltasArray { get { return delta; } set { delta = value; } }
+
+//ChatGPT
+// Set bias to zero if it falls within the range of -0.01 and 0.01
+//if (biases[i] >= -0.01f && biases[i] <= 0.01f)
+//{
+//    biases[i] = 0;
+//}
