@@ -202,7 +202,7 @@ public class CNeurode : Neurode
                 activationValue = 0;
 
                 for (int n = 0; n < parentLayer.Length; n++)
-                    for (int o = 0; o < weights[n].Length / 2; o++)
+                    for (int o = 0; o < weights[n].Length; o++)
                         activationValue += parentLayer[n].Delta * NestedWeightsArray[0][n][o][i] + NestedWeightsArray[0][n][o][i];
 
                 deltas[i] = Neurode.GetActivationValue(activationValue, type);
