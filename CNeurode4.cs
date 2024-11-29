@@ -236,6 +236,32 @@ public void Initiate(int localType, System.Random randomGen, NeurodeType type, i
 
     public override void RunForwardNested(Neurode[] parentLayer)
     {
+
+    //if (type == 5)// [0][0][n][o][i] [0][1][n][o][i]          |         [1][0][n][o][i] [1][1][n][o][i]
+    //{
+    //    float activationValueOuter = 0;
+
+    //    for (int i = 0; i < deltas.Length; i++)
+    //    {
+    //        float activationValue = 0;
+
+    //        for (int n = 0; n < parentLayer.Length; n++)
+    //            for (int o = 0; o < weights[n].Length; o++)
+    //                activationValue += parentLayer[n].Delta * nestedWeightsArray[0][n][o] + nestedBiasesArray[1][n][o];
+
+    //        if (Neurode.GetActivationValue(activationValue, type) != 0)
+    //        {
+    //            for (int n = 0; n < parentLayer.Length; n++)
+    //                for (int o = 0; o < weights[n].Length; o++)
+    //                    activationValue += parentLayer[n].Delta * nestedWeightsArray[2][n][o] + nestedBiasesArray[3][n][o];
+
+    //            activationValueOuter += activationValue;
+    //        }
+    //    }
+
+
+
+    
         //Exponentiel  0 - 8  ##############################################################################################################################################################################################################
 
         if (type == 0)//Feedforward needs to feed it self!!!
