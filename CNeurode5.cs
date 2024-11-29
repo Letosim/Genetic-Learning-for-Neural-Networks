@@ -452,7 +452,7 @@ public class CNeurode : Neurode
              }
          }
 
-             if (type == 6)// [0][o] [n]      [0][o] | [1][o] [1][o]      |        [2][o] [2][o] | [3][o] [3][o]    whole network
+             if (type == 6)// [0][o] * [whole network]      [0][o] | [1][o] [1][o]      |        [2][o] [2][o] | [3][o] [3][o]    
              {
                  float activationValueOuter = 0;
 
