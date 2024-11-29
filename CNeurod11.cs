@@ -12,25 +12,24 @@ public class CNeurode
 
     private bool isMemoryNeurode;
 
-    public float delta;
-    public float[] weight;
-    public float[] bias;
 
     public NeurodeType Type { get { return type; } set { type = value; } }
     public bool IsMemoryNeurode { get { return isMemoryNeurode; } set { isMemoryNeurode = value; } }
 
+    public float delta;
     public float Delta { get { return delta; } set { delta = value; } }
+
+    public float[] weight;
+    public float[] bias;
     public float[] Bias { get { return bias; } set { bias = value; } }
     public float[] Weight { get { return weight; } set { weight = value; } }
  
     public float[][] weightMatrix;
     public float[][] biasVector;
+    public float[][] WeightMatrix { get { return weightMatrix; } set { weightMatrix = value; } }
+    public float[][] BiasVector { get { return biasVector; } set { biasVector = value; } }
 
-    public float[][] WeightMatrix { get { return weights; } set { weights = value; } }
-    public float[][] BiasVector { get { return biases; } set { biases = value; } }
-
-
-
+    
     /// <summary>
     /// Type (0 && 1 && 2): Initializes delta, weight[], and bias[].
     /// Type (3 && 4 && 5   &&  12 && 13 && 14): Initializes delta, weightMatrix[switchCount 2][deviation], and biasVector[switchCount 2][deviation].
