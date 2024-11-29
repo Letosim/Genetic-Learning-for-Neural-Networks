@@ -2,50 +2,56 @@
 
 public class CNeurode : Neurode
 {
-    private NeurodeType type;
-    private int localType = 0;
-    private bool isMemoryNeurode;
-    private float delta;
-    private float[] weight;
-    private float[] bias;
+  private NeurodeType type;
+  private int localType = 0;
+  private bool isMemoryNeurode;
+
+  // parallel acces;
+  public float delta;
+  public float[] weight;
+  public float[] bias;
 
 
-    public override NeurodeType Type { get { return type; } set { type = value; } }
-    public override float Delta { get { return delta; } set { delta = value; } }
-    public override bool IsMemoryNeurode { get { return isMemoryNeurode; } set { isMemoryNeurode = value; } }
-    public override float[] Bias { get { return bias; } set { bias = value; } }
-    public override float[] Weight { get { return weight; } set { weight = value; } }
+  public override NeurodeType Type { get { return type; } set { type = value; } }
+  public override bool IsMemoryNeurode { get { return isMemoryNeurode; } set { isMemoryNeurode = value; } }
+
+  // batch acces;
+  public float Delta { get { return delta; } set { delta = value; } }
+  public float[] Bias { get { return bias; } set { bias = value; } }
+  public float[] Weight { get { return weight; } set { weight = value; } }
 
 
-    private float[] delta1D;
+  // parallel acces;
+  public float[] delta1D;
 
-    private float[][] weight2D;
-    private float[][] bias2D;
+  public float[][] weight2D;
+  public float[][] bias2D;
 
-    private float[][][] weight3D;
-    private float[][][] bias3D;
+  public float[][][] weight3D;
+  public float[][][] bias3D;
 
-    private float[][][][] weight4D;
-    private float[][][][] bias4D;
+  public float[][][][] weight4D;
+  public float[][][][] bias4D;
 
-    private float[][][][][] weight5D;
-    private float[][][][][] bias5D;
+  public float[][][][][] weight5D;
+  public float[][][][][] bias5D;
 
 
-    public override float[] Delta1D { get { return delta1D; } set { delta1D = value; } }
+  // batch acces;
+  public float[] Delta1D { get { return delta1D; } set { delta1D = value; } }
+  public float[] Delta1D { get { return delta1D; } set { delta1D = value; } }
 
-    public override float[][] Weight2D { get { return weight2D; } set { weight2D = value; } }
-    public override float[][] Bias2D { get { return bias2D; } set { bias2D = value; } }
+  public float[][] Weight2D { get { return weight2D; } set { weight2D = value; } }
+  public float[][] Bias2D { get { return bias2D; } set { bias2D = value; } }
 
-    public override float[][][] Weight3D { get { return weight3D; } set { weight3D = value; } }
-    public override float[][][] Bias3D { get { return bias3D; } set { bias3D = value; } }
+  public float[][][] Weight3D { get { return weight3D; } set { weight3D = value; } }
+  public float[][][] Bias3D { get { return bias3D; } set { bias3D = value; } }
 
-    public override float[][][][] Weight4D { get { return weight4D; } set { weight4D = value; } }
-    public override float[][][][] Bias4D { get { return bias4D; } set { bias4D = value; } }
+  public float[][][][] Weight4D { get { return weight4D; } set { weight4D = value; } }
+  public float[][][][] Bias4D { get { return bias4D; } set { bias4D = value; } }
 
-    public override float[][][][][] Weight5D { get { return weight5D; } set { weight5D = value; } }
-    public override float[][][][][] Bias5D { get { return bias5D; } set { bias5D = value; } }
-
+  public float[][][][][] Weight5D { get { return weight5D; } set { weight5D = value; } }
+  public float[][][][][] Bias5D { get { return bias5D; } set { bias5D = value; } }
 
     public CNeurode(int layer, int parentLayerSize, System.Random randomGen, NeurodeType type)
     {
