@@ -178,6 +178,8 @@ public class CNeurode : Neurode
     
             if (delta != 0)
             {
+                activationValue = 0;
+                
                 for (int n = 0; n < parentLayer.Length; n++)
                     for (int o = 0; o < weights[n].Length; o++)
                         activationValue += parentLayer[n].Delta * nestedWeightsArray[1][n][o] + nestedBiasesArray[1][n][o];
