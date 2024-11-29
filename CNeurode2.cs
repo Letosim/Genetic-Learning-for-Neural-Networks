@@ -166,6 +166,25 @@ public class CNeurode : Neurode
 
     public override void RunForwardChromosome(Neurode[] parentLayer)// 4[][]
     {
+        if (type == 5)
+        {
+            float activationValue = 0;
+    
+            for (int n = 0; n < parentLayer.Length; n++)
+                for (int o = 0; o < weights[n].Length; o++)
+                    activationValue += parentLayer[n].Delta * nestedWeightsArray[0][n][o] + nestedBiasesArray[0][n][o];
+    
+            delta = Neurode.GetActivationValue(activationValue, type);
+    
+            if (delta != 0)
+            {
+                for (int n = 0; n < parentLayer.Length; n++)
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += parentLayer[n].Delta * nestedWeightsArray[1][n][o] + nestedBiasesArray[1][n][o];
+    
+                delta = Neurode.GetActivationValue(activationValue, type);
+            }
+        }
         if (type == 4)
         {
             float activationValue = 0;
