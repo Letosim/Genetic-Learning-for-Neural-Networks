@@ -15,9 +15,32 @@ GL & HF "I am ot sure if its over complex but i think that there is great abstra
 //bufferedGate?
 //   activationValue += parentLayer[n].Delta * nestedWeightsArray[1][0][n][k][o][i] + nestedBiasesArray[1][0][n][k][o][i];//Buffer
 
-//        
+// ######################################################################################################################################################################################################################################################################################################################
+        if (type == 7)// [0][o] [0][o]      |       [1][o] [1][o]       &&      [>>]
+        {
+            float activationValue = 0;
+
+            for (int i = 0; i < network.GetLength(0); n++)
+                for (int n = 0; n < network.GetLength(1); n++)
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += network[i][n].Delta * nestedWeightsArray[0][o] + nestedBiasesArray[0][o];
+
+            if (Neurode.GetActivationValue(activationValue, type) != 0)
+            {
+                activationValue = 0;
+
+                for (int i = 0; i < network.GetLength(0); n++)
+                    for (int n = 0; n < network.GetLength(1); n++)
+                        for (int o = 0; o < weights[n].Length; o++)
+                            activationValue += network[i][n].Delta * nestedWeightsArray[1][o] + nestedBiasesArray[1][o];
+
+                delta = Neurode.GetActivationValue(activationValue, type);
+            }
+        }    
 
 
+// This could be for example used in a AI based creature where the neural nets controlling muscles each contain some of those "type7" neurodes to represent all other neural nets or there neurons as a whole...
+// ######################################################################################################################################################################################################################################################################################################################
 
 
 
