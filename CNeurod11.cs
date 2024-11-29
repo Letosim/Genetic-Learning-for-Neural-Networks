@@ -294,7 +294,76 @@ public class CNeurode
          }
      }
 
+        if (type == -1)// [0][o] [0][o] | [1][o] [1][o]      |        [2][o] [2][o] | [3][o] [3][o]       &&      [>]    
+        {
+            float activationValue = delta;
 
+            for (int n = 0; n < neurodes.Length; n++)
+            {
+                if (Neurode.GetActivationValue(activationValue, type) != 0)
+                {
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += neurodes[n].Delta * nestedWeightsArray[0][o] + nestedBiasesArray[0][o];
+                }
+
+                if (Neurode.GetActivationValue(activationValue, type) != 0)
+                {
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += neurodes[n].Delta * nestedWeightsArray[1][o] + nestedBiasesArray[1][o];
+
+                    delta = Neurode.GetActivationValue(activationValue, type);
+                }
+                else
+                    delta = 0;
+            }
+        }
+
+        if (type == -1)// [0][o] [0][o] | [1][o] [1][o]      |        [2][o] [2][o] | [3][o] [3][o]       &&      [>>]    
+        {
+            float activationValue = delta;
+
+            for (int n = 0; n < neurodes.Length; n++)
+            {
+                if (Neurode.GetActivationValue(activationValue, type) != 0)
+                {
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += neurodes[n].Delta * nestedWeightsArray[0][o] + nestedBiasesArray[0][o];
+                }
+
+                if (Neurode.GetActivationValue(activationValue, type) != 0)
+                {
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += neurodes[n].Delta * nestedWeightsArray[1][o] + nestedBiasesArray[1][o];
+
+                    delta = Neurode.GetActivationValue(activationValue, type);
+                }
+            }
+        }
+
+        if (type == -1)// [0][o] [0][o] | [1][o] [1][o]      |        [2][o] [2][o] | [3][o] [3][o]       &&      [...]    
+        {
+            float activationValue = delta;
+
+            for (int n = 0; n < neurodes.Length; n++)
+            {
+                if (Neurode.GetActivationValue(activationValue, type) != 0)
+                {
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += neurodes[n].Delta * nestedWeightsArray[0][o] + nestedBiasesArray[0][o];
+                }
+
+                delta = Neurode.GetActivationValue(activationValue, type);
+
+                if (Neurode.GetActivationValue(activationValue, type) != 0)
+                {
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += neurodes[n].Delta * nestedWeightsArray[1][o] + nestedBiasesArray[1][o];
+
+                    delta = Neurode.GetActivationValue(activationValue, type);
+                }
+            }
+        }
+        
      if (type == 6)// [0][o] [0][o] | [1][o] [1][o]      |        [2][o] [2][o] | [3][o] [3][o]       &&      [>]    
      {
          float activationValue = delta;
