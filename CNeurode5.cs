@@ -246,7 +246,10 @@ public class CNeurode : Neurode
                     chromosomes[n][i] = (float)randomGen.NextDouble();
             }
     }
-
+    public override void RunForward(Neurode[][] network)
+    {
+        throw new System.NotImplementedException();
+    }
     public override void RunForward(Neurode[] parentLayer)
     {
         if (isMemoryNeurode)//Always Feeding it self !!!!!!! delta > is looping
@@ -860,10 +863,7 @@ public class CNeurode : Neurode
     {
         throw new System.NotImplementedException();
     }
-    public override void RunForward(Neurode[][] network)
-    {
-        throw new System.NotImplementedException();
-    }
+
 }
 
 //    private int layer;
