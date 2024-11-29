@@ -179,11 +179,16 @@ public class CNeurode : Neurode
             }
             else
                 {
-                for (int i = 0; i < MemoryChromosomeCount; i++)    //public override float Memory[] { get { return delta; } set { delta = value; } }?????????????????????????????????????????????
-                {
-                    for (int n = 0; n < parentLayer.Length; n++)
-                        activationValue += parentLayer[n].Delta * weights[n][0] + biases[n][0];
-                }
+                  for (int i = 0; i < deltas.Length; i++)    //public override float Memory[] { get { return delta; } set { delta = value; } }?????????????????????????????????????????????
+                        {
+                            activationValue = 0;
+                    
+                            for (int n = 0; n < parentLayer.Length; n++)
+                                for (int o = 0; o < weights[n].Length; o++)
+                                    activationValue += parentLayer[n].Delta * weights[n][o][i] + biases[n][o][i];
+                    
+                                deltas[i] = Neurode.GetActivationValue(activationValue, type);
+                        }
 
 
                 delta = Neurode.GetActivationValue(activationValue, type);
