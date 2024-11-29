@@ -159,56 +159,57 @@ public class CNeurode
 
 
 
-    public void RunForward(List<CNeurode> neurodes)
-    {
-        if (type == 0)//[k] * ([0][o] [0][o] | [1][o] [1][o])      |        [k] * ([2][o] [2][o] | [3][o] [3][o])     &&      [>]
-        {
-            float activationValue = 0;
-
-            for (int i = 0; i < vectorCount; i++)
-                        activationValue += neurodes[i].Delta * weight[o] + bias[o];
-
-            delta = GetActivationValue(activationValue, type);
-        }
-
-        if (type == 1)//[k] * ([0][o] [0][o] | [1][o] [1][o])      |        [k] * ([2][o] [2][o] | [3][o] [3][o])     &&      [>>]
-        {
-            float activationValue = 0;
-
-            for (int i = 0; i < neurodes.GetLength(0); i++)
-                for (int o = 0; o < vectorCount; o++)
-                    activationValue += neurodes[i].Delta * weightMatrix[0][o] + biasVector[0][o];
-
-            if (GetActivationValue(activationValue, type) != 0)
-            {
-                for (int i = 0; i < neurodes.GetLength(0); i++)
-                    for (int o = 0; o < vectorCount; o++)
-                        activationValue += neurodes[i].Delta * weightMatrix[1][o] + biasVector[1][o];
-
-                delta = GetActivationValue(activationValue, type);
-            }
-        }
-
-        if (type == 2)//[k] * ([0][o] [0][o] | [1][o] [1][o])      |        [k] * ([2][o] [2][o] | [3][o] [3][o])     &&      [...]
-        {
-            float activationValue = 0;
-
-            for (int i = 0; i < neurodes.GetLength(0); i++)
-                for (int o = 0; o < vectorCount; o++)
-                    activationValue += neurodes[i].Delta * weightMatrix[0][o] + biasVector[0][o];
-
-            delta = GetActivationValue(activationValue, type);//Base!?
-
-            if (delta != 0) 
-            {
-                for (int i = 0; i < neurodes.GetLength(0); i++)
-                    for (int o = 0; o < vectorCount; o++)
-                        activationValue += neurodes[i].Delta * weightMatrix[1][o] + biasVector[1][o];
-
-                delta = GetActivationValue(activationValue, type);
-            }
-        }
-    }
+      public void RunForward(List<CNeurode> neurodes)
+       {
+           if (type == 0)//                                                                                    [>|]
+           {
+               float activationValue = 0;
+    
+               for (int n = 0; n < neurodes.Count; n++)
+                   for (int v = 0; v < vectorCount; v++)
+                       activationValue += neurodes[n].Delta * weight[v] + bias[v];
+    
+               delta = GetActivationValue(activationValue, type);
+           }
+    
+           if (type == 1)//                                                                                    [..]
+           {
+               float activationValue = 0;
+    
+               for (int n = 0; n < neurodes.Count; n++)
+                   for (int v = 0; v < vectorCount; v++)
+                       activationValue += neurodes[n].Delta * weightMatrix[0][v] + biasVector[0][v];
+    
+               if (GetActivationValue(activationValue, type) != 0)
+               {
+                   for (int n = 0; n < neurodes.Count; n++)
+                       for (int v = 0; v < vectorCount; v++)
+                           activationValue += neurodes[n].Delta * weightMatrix[1][v] + biasVector[1][v];
+    
+                   delta = GetActivationValue(activationValue, type);
+               }
+           }
+    
+           if (type == 2)//                                                                                    [>>]
+           {
+               float activationValue = 0;
+    
+               for (int n = 0; n < neurodes.Count; n++)
+                   for (int v = 0; v < vectorCount; v++)
+                       activationValue += neurodes[n].Delta * weightMatrix[0][v] + biasVector[0][v];
+    
+               delta = GetActivationValue(activationValue, type);
+    
+               if (delta != 0) 
+               {
+                   for (int n = 0; n < neurodes.Count; n++)
+                       for (int v = 0; v < vectorCount; v++)
+                           activationValue += neurodes[n].Delta * weightMatrix[1][v] + biasVector[1][v];
+    
+                   delta = GetActivationValue(activationValue, type);
+               }
+           }
+       }
     
     public void RunForward(Neurode[] parentLayer)
     {
