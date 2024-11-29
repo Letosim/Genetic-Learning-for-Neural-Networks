@@ -54,35 +54,84 @@ public class CNeurode : Neurode
   public float[][][][][] Bias5D { get { return bias5D; } set { bias5D = value; } }
 
 
- /// <summary>
- /// Type 0: Initializes delta, weight[], and bias[].
- /// </summary>
- public void Initiate(int localType, System.Random randomGen, NeurodeType type, int magnitudeCount)
- {
-     if (localType == 0)
-     {
-         float delta = 0;
-         float[] weight = new float[magnitudeCount];
-         float[] bias = new float[magnitudeCount];
-     }
-     else
-         throw new ArgumentException("Invalid localType value. Only '0' is supported.", nameof(localType));
- }
+/// <summary>
+/// Type 0: Initializes delta, weight[], and bias[].
+/// </summary>
+public void Initiate(int localType, System.Random randomGen, NeurodeType type, int magnitudeCount)
+{
+    if (localType == 0)
+    {
+        float delta = 0;
+        float[] weight = new float[magnitudeCount];
+        float[] bias = new float[magnitudeCount];
+    }
+    else
+        throw new ArgumentException("Invalid localType value. Only '0' is supported.", nameof(localType));
+}
 
- /// <summary>
- /// Type 0: Initializes delta, weight[2][2][magnitudeCount], and bias[2][2][magnitudeCount].
- /// </summary>
- public void Initiate(int localType, System.Random randomGen, NeurodeType type, int magnitudeCount)
- {
-     if (localType == 0)
-     {
-         float delta = 0;
-         float[][]   [] weight = new float[magnitudeCount];
-         float[][]   [] bias = new float[magnitudeCount];
-     }
-     else
-         throw new ArgumentException("Invalid localType value. Only '0' is supported.", nameof(localType));
- }
+/// <summary>
+/// Type 0: Initializes delta, weight[2][2][magnitudeCount], and bias[2][2][magnitudeCount].
+/// 
+/// *ChatGPT Implementation ---->
+/// 
+/// weight = [
+/// [
+///     [0.12, 0.34, 0.56],
+///     [0.78, 0.90, 0.21]
+/// ],
+/// [
+///     [0.43, 0.65, 0.87],
+///     [0.09, 0.32, 0.54]
+/// ]]
+/// 
+///Bias array would follow the same structure.
+///
+/// </summary>
+public void Initiate(int localType, System.Random randomGen, NeurodeType type, int magnitudeCount)
+{
+    if (localType == 0)
+    {
+        float delta = 0;
+
+        if (is3D)
+        {
+            float[][][] weight = new float[2][][];
+            float[][][] bias = new float[2][][];
+
+            for (int i = 0; i < 2; i++)
+            {
+                weight[i] = new float[2][];
+                bias[i] = new float[2][];
+
+                for (int j = 0; j < 2; j++)
+                {
+                    weight[i][j] = new float[magnitudeCount];
+                    bias[i][j] = new float[magnitudeCount];
+
+                    for (int k = 0; k < magnitudeCount; k++)
+                    {
+                        weight[i][j][k] = (float)randomGen.NextDouble();
+                        bias[i][j][k] = (float)randomGen.NextDouble();
+                    }
+                }
+            }
+        }
+        else
+        {
+            float[] weight = new float[magnitudeCount];
+            float[] bias = new float[magnitudeCount];
+
+            for (int i = 0; i < magnitudeCount; i++)
+            {
+                weight[i] = (float)randomGen.NextDouble();
+                bias[i] = (float)randomGen.NextDouble();
+            }
+        }
+    }
+    else
+        throw new ArgumentException("Invalid localType value. Only '0' is supported.", nameof(localType));
+}
+///<---- ChatGPT Implementation*
 
 
     public CNeurode(int layer, int parentLayerSize, System.Random randomGen, NeurodeType type)
