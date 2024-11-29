@@ -281,6 +281,31 @@ public class CNeurode : Neurode
 
     public override void RunForward(Neurode[][] network)
     {
+           if (type == 8)// [0][o] [0][o] | [1][o] [1][o]      |        [2][o] [2][o] | [3][o] [3][o]      &&      [8]
+       {
+           float activationValue = 0;
+
+           for (int i = 0; i < network.GetLength(0); n++)
+               for (int n = 0; n < network.GetLength(1); n++)
+                   for (int o = 0; o < weights[n].Length; o++)
+                       for (int k = 0; k < 7; k++)//magic number
+                           activationValue += network[i][n].Delta * nestedWeightsArray[0][o][i] + nestedBiasesArray[0][o][i];
+
+               if (Neurode.GetActivationValue(activationValue, type) != 0)
+               {
+                   activationValue = 0;
+
+                   for (int i = 0; i < network.GetLength(0); n++)
+                       for (int n = 0; n < network.GetLength(1); n++)
+                           for (int o = 0; o < weights[n].Length; o++)
+                               for (int k = 0; k < 7; k++)//magic number
+                           activationValue += network[i][n].Delta * nestedWeightsArray[1][o][i] + nestedBiasesArray[1][o][i];
+
+                   delta = Neurode.GetActivationValue(activationValue, type)
+               }
+               else
+                delta = 0;
+       }
           if (type == 6)// [0][o][0][o] | [1][o] [1][o]
             {
                 float activationValue = 0;
