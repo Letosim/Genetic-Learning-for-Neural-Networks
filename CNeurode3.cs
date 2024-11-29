@@ -152,7 +152,38 @@ public class CNeurode : Neurode
             }
     }
 
-    public override void RunForwardChromosome(Neurode[] parentLayer)// 4[][]
+    public override void RunForward(Neurode[] parentLayer)
+    {
+        if (isMemoryNeurode)//Always Feeding it self !!!!!!! delta > is looping
+        {
+            float activationValue = 0;
+
+            for (int i = 0; i < startIndexSecondGate; i++)
+                activationValue += parentLayer[i].delta * weight[i] + bias[i];
+
+            activationValue = Neurode.GetActivationValue(activationValue, type);//Gate Value
+
+            if (activationValue != 0)// Gate
+            {
+                for (int i = 0; i < startIndexSecondGate; i++)
+                    activationValue += parentLayer[i].delta * weight[i] + bias[i];
+
+                delta = Neurode.GetActivationValue(activationValue, type);//Buffered Value
+            } 
+        }
+        else
+        {
+            float activationValue = 0;
+
+            for (int i = 0; i < startIndexSecondGate; i++)
+                activationValue += parentLayer[i].delta * weight[i] + bias[i];
+
+            delta = Neurode.GetActivationValue(activationValue, type);
+        }
+
+    }
+
+    public override void RunForwardChromosome(Neurode[] parentLayer)
     {
         //Exponentiel ##############################################################################################################################################################################################################
 
@@ -431,7 +462,39 @@ public class CNeurode : Neurode
 
         //Linear ###################################################################################################################################################################################################################
 
-        if (type == 5)
+
+        if (type == 9)//Feedforward
+        {
+            float activationValue = 0;
+            float activationCount = 0;
+
+            for (int i = 0; i < parentLayer.Length; i++)
+                if(Neurode.GetActivationValue(parentLayer[i].delta * weight[i] + bias[i], type))
+                    activationCount++;
+
+            activationValue = Neurode.GetActivationValue(activationCount, type);
+
+            if (activationValue != 0)
+                delta = activationValue;
+        }
+
+        if (type == 10)//Feedforward Buffered
+        {
+            float activationValue = 0;
+            float activationCount = 0;
+
+            for (int i = 0; i < parentLayer.Length; i++)
+                if (Neurode.GetActivationValue(parentLayer[i].delta * weight[i] + bias[i], type))
+                    activationCount++;
+
+            activationValue = Neurode.GetActivationValue(activationCount, type);//BufferdValue
+            delta = activationValue;// delta = 0
+
+            if (delta != 0)
+                delta = activationValue;
+        }
+
+        if (type == 11)
         {
             float activationCounter = 0;
 
@@ -472,7 +535,7 @@ public class CNeurode : Neurode
             }
         }
 
-        if (type == 6)// linear 2
+        if (type == 12)// linear 2
         {
             float activationValueOuter = 0;
 
@@ -526,36 +589,6 @@ public class CNeurode : Neurode
 
     }
 
-    public override void RunForward(Neurode[] parentLayer)
-    {
-        if (isMemoryNeurode)
-        {
-            float activationValue = 0;
-
-            for (int i = 0; i < startIndexSecondGate; i++)
-                activationValue += parentLayer[i].delta * weight[i];
-
-            activationValue = Neurode.GetActivationValue(activationValue, type);
-
-            if (activationValue != 0)
-            {
-                for (int i = 0; i < startIndexSecondGate; i++)
-                    activationValue += parentLayer[i].delta * weight[i] + bias[i];
-
-                delta = Neurode.GetActivationValue(activationValue, type);
-            }
-        }
-        else
-        {
-            float activationValue = 0;
-
-            for (int i = 0; i < startIndexSecondGate; i++)
-                activationValue += parentLayer[i].delta * weight[i] + bias[i];
-
-            delta = Neurode.GetActivationValue(activationValue, type);
-        }
-
-    }
 
     public override void Respawn(System.Random randomGen)
     {
