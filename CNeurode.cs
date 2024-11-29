@@ -30,8 +30,9 @@ public class CNeurode : Neurode
     public override int Layer { get { return layer; } set { layer = value; } }
     public override float Delta { get { return delta; } set { delta = value; } }
 
-    //public override float Memory[] { get { return delta; } set { delta = value; } }?????????????????????????????????????????????
-
+    // public override float Delta[] { get { return delta; } set { delta = value; } }
+    // public override float[][][] Weights { get { return weights; } set { weights = value; } }
+    // public override float[][][] Biases { get { return biases; } set { biases = value; } }
 
     public override float[] Bias { get { return bias; } set { bias = value; } }
     public override float[] Weight { get { return weight; } set { weight = value; } }
