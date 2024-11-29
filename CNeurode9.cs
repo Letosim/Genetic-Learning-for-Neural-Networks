@@ -527,50 +527,46 @@ public class CNeurode : Neurode
          }
      }
  }
-    public override void RunForwardNested(Neurode[] parentLayer)
-    {
-        if (type == 0)//Needs to feed it self!!!    &&      [>>]
-        {
-            float activationValue = 0;
+         if (type == 0)
+       {
+           float activationValue = 0;
 
-            for (int i = 0; i < parentLayer.Length; i++)
-                activationValue += parentLayer[i].delta * weight[i] + bias[i];
+           for (int i = 0; i < parentLayer.Length; i++)
+               activationValue += parentLayer[i].delta * weight[i] + bias[i];
 
-            activationValue = Neurode.GetActivationValue(activationValue, type);
+           activationValue = Neurode.GetActivationValue(activationValue, type);
 
-            if (activationValue != 0)
-                delta = activationValue;
-        }
+           if (activationValue != 0)
+               delta = activationValue;
+           else
+               delta = 0;// [>] Reset it self [>]
+       }
 
+       if (type == 1)
+       {
+           float activationValue = 0;
 
-        if (type == 0)//    &&      [>]
-        {
-            float activationValue = 0;
+           for (int i = 0; i < parentLayer.Length; i++)
+               activationValue += parentLayer[i].delta * weight[i] + bias[i];
 
-            for (int i = 0; i < parentLayer.Length; i++)
-                activationValue += parentLayer[i].delta * weight[i] + bias[i];
+           activationValue = Neurode.GetActivationValue(activationValue, type);
 
-            activationValue = Neurode.GetActivationValue(activationValue, type);
+           if (activationValue != 0)// [>>] Til Next Activation [>>]
+               delta = activationValue
+       }
 
-            if (activationValue != 0)
-                delta = activationValue;
-            else 
-                delta = 0;
-        }
+       if (type == 2)
+       {
+           float activationValue = 0;
 
-        if (type == 1)//Buffered
-        {
-            float activationValue = 0;
+           for (int i = 0; i < parentLayer.Length; i++)
+               activationValue += parentLayer[i].delta * weight[i] + bias[i];
 
-            for (int i = 0; i < parentLayer.Length; i++)
-                activationValue += parentLayer[i].delta * weight[i] + bias[i];
+           delta = Neurode.GetActivationValue(activationValue, type);//[...] Keep GateValue/Activation value [...]
 
-            delta = Neurode.GetActivationValue(activationValue, type); //Buffered value
-
-            if (activationValue != 0)
-                delta = activationValue;
-        }
-
+           if (activationValue != 0)
+               delta = activationValue;
+       }
             if (type == 2)// [0][n][o]       |      [1][n][o]
             {
                 float activationValue = 0;
