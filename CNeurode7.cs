@@ -281,24 +281,52 @@ public class CNeurode : Neurode
 
     public override void RunForward(Neurode[][] network)
     {
-        if (type == 6)// [0][o] [whole network] || GameOfLife tick/tack      [0][o] | [1][o] [1][o]      |        [2][o] [2][o] | [3][o] [3][o]    
-        {
-            float activationValue = 0;
-
-            for (int i = 0; i < network.GetLength(0); n++)
-                for (int n = 0; n < network.GetLength(0); n++)
-                {
-
-                    for (int o = 0; o < weights[n].Length; o++)
-                        activationValue += network[i][n].Delta * nestedWeightsArray[0][o] + nestedBiasesArray[0][o];
-                }
-
-
-
-                if (Neurode.GetActivationValue(activationValue, type) != 0)
+          if (type == 6)// [0][o][0][o] | [1][o] [1][o]
+            {
+                float activationValue = 0;
+        
+                for (int i = 0; i < network.GetLength(0); n++)
+                    for (int n = 0; n < network.GetLength(0); n++)
+                    {
+        
+                        for (int o = 0; o < weights[n].Length; o++)
+                            activationValue += network[i][n].Delta * nestedWeightsArray[0][o] + nestedBiasesArray[0][o];
+                    }
+        
+                    if (Neurode.GetActivationValue(activationValue, type) != 0)
+                    {
+                        activationValue = 0;
+        
+                        for (int i = 0; i < network.GetLength(0); n++)
+                            for (int n = 0; n < network.GetLength(0); n++)
+                            {
+                                for (int o = 0; o < weights[n].Length; o++)
+                                    activationValue += network[i][n].Delta * nestedWeightsArray[1][o] + nestedBiasesArray[1][o];
+                            }
+                        delta = Neurode.GetActivationValue(activationValue, type);
+                    }
+                    else
+                        delta = 0;
+            }
+        
+            if (type == 7)// [0][o][0][o] | [1][o] [1][o]       &&      [8]
+            {
+                float activationValue = 0;
+        
+                for (int i = 0; i < network.GetLength(0); n++)
+                    for (int n = 0; n < network.GetLength(0); n++)
+                    {
+        
+                        for (int o = 0; o < weights[n].Length; o++)
+                            activationValue += network[i][n].Delta * nestedWeightsArray[0][o] + nestedBiasesArray[0][o];
+                    }
+        
+                delta = Neurode.GetActivationValue(activationValue, type);
+        
+                if (delta != 0)
                 {
                     activationValue = 0;
-
+        
                     for (int i = 0; i < network.GetLength(0); n++)
                         for (int n = 0; n < network.GetLength(0); n++)
                         {
@@ -307,37 +335,7 @@ public class CNeurode : Neurode
                         }
                     delta = Neurode.GetActivationValue(activationValue, type);
                 }
-                else
-                    delta = 0;
-        }
-
-        if (type == 6)// [0][o] [whole network] || GameOfLife tick/tack      [0][o] | [1][o] [1][o]      |        [2][o] [2][o] | [3][o] [3][o]     &&      [8]
-        {
-            float activationValue = 0;
-
-            for (int i = 0; i < network.GetLength(0); n++)
-                for (int n = 0; n < network.GetLength(0); n++)
-                {
-
-                    for (int o = 0; o < weights[n].Length; o++)
-                        activationValue += network[i][n].Delta * nestedWeightsArray[0][o] + nestedBiasesArray[0][o];
-                }
-
-            delta = Neurode.GetActivationValue(activationValue, type);
-
-            if (delta != 0)
-            {
-                activationValue = 0;
-
-                for (int i = 0; i < network.GetLength(0); n++)
-                    for (int n = 0; n < network.GetLength(0); n++)
-                    {
-                        for (int o = 0; o < weights[n].Length; o++)
-                            activationValue += network[i][n].Delta * nestedWeightsArray[1][o] + nestedBiasesArray[1][o];
-                    }
-                delta = Neurode.GetActivationValue(activationValue, type);
             }
-        }
     }
 
     public override void RunForwardNested(Neurode[] parentLayer)
