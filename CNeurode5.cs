@@ -329,7 +329,7 @@ public class CNeurode : Neurode
                         }
                     }
 
-                    if (type == 3)// [0][n][o]       |      [1][n][o]
+                    if (type == 3)// ([0][n][o]       |      [1][n][o])     &&      [8]
                     {
                         float activationValue = 0;
 
