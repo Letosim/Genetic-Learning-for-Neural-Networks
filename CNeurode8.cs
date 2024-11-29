@@ -329,7 +329,7 @@ public class CNeurode : Neurode
             }
         }
 
-            if (type == 8)// [0][o] [0][o] | [1][o] [1][o]      |        [2][o] [2][o] | [3][o] [3][o]
+            if (type == 8)// [0][o] [0][o] | [1][o] [1][o]      |        [2][o] [2][o] | [3][o] [3][o]      // if looped you loop the whole network abstracted to one float using a activation function * k.
             {
                 float activationValue = 0;
 
