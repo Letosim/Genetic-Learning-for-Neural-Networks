@@ -322,7 +322,7 @@ public class CNeurode : Neurode
 
                             for (int n = 0; n < parentLayer.Length; n++)
                                 for (int o = 0; o < weights.Length; o++)
-                                    activationValue += parentLayer[n].Delta * weightsArray[0][o] + biasesArray[0][o];
+                                    activationValue += parentLayer[n].Delta * weightsArray[1][o] + biasesArray[1][o];
 
 
                             delta = Neurode.GetActivationValue(activationValue, type);
@@ -345,7 +345,7 @@ public class CNeurode : Neurode
 
                             for (int n = 0; n < parentLayer.Length; n++)
                                 for (int o = 0; o < weights.Length; o++)
-                                    activationValue += parentLayer[n].Delta * weightsArray[0][o] + biasesArray[0][o];
+                                    activationValue += parentLayer[n].Delta * weightsArray[1][o] + biasesArray[1][o];
 
 
                             delta = Neurode.GetActivationValue(activationValue, type);
