@@ -363,7 +363,8 @@ public class CNeurode
                 }
             }
         }
-        
+
+        //K Out of bounds
      if (type == 6)// [0][o] [0][o] | [1][o] [1][o]      |        [2][o] [2][o] | [3][o] [3][o]       &&      [>]    
      {
          float activationValue = delta;
