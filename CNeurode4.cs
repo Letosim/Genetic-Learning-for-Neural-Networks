@@ -3,7 +3,7 @@
 public class CNeurode : Neurode
 {
     private NeurodeType type;
-    private int brumbrum = 0;
+    private int localType = 0;
     private bool isMemoryNeurode;
     private float delta;
     private float[] weight;
