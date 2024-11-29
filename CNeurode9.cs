@@ -49,6 +49,53 @@ public class CNeurode : Neurode
     public float[][][][][] Bias5D { get { return bias5D; } set { bias5D = value; } }
 
 
+
+   /// <summary>
+   /// Type (0 && 1 && 2): Initializes delta, weight[], and bias[].
+   /// Type (3 && 4 && 5   &&  12 && 13 && 14): Initializes delta, weightMatrix[switchCount 2][deviation], and biasVector[switchCount 2][deviation].
+   /// Type (6 && 7 && 8   &&  15 && 16 && 17): Initializes delta, weightMatrix[switchCount 4][deviation], and biasVector[switchCount 4][deviation].
+   /// </summary>
+   public void Initiate(int localType, System.Random randomGen, NeurodeType type, int magnitudeCount, FanType type)
+   {
+       delta = 0;
+
+       int count = GetFanInValue(magnitudeCount, FanType type);
+
+       int switchCount = 0;
+
+       if (localType == 3 || localType == 4 || localType == 5 || localType == 12 || localType == 13 || localType == 14)
+           switchCount = 2;
+
+       if (localType == 6 || localType == 7 || localType == 8 || localType == 15 || localType == 16 || localType == 17)
+           switchCount = 4;
+
+       if (localType == 0 || localType == 1 || localType == 2) 
+       {
+           weight = new float[count];
+           bias = new float[count];
+       }
+
+       if (localType == 3 || localType == 4 || localType == 5 || localType == 12 || localType == 13 || localType == 14 || localType == 6 || localType == 7 || localType == 8 || localType == 15 || localType == 16 || localType == 17)
+       {
+           float delta = 0;
+
+           weightMatrix = new float[switchCount][];
+           biasVector = new float[switchCount][];
+
+           for (int i = 0; i < switchCount; i++)
+           {
+               weightMatrix[i] = new float[count];
+               biasVector[i] = new float[count];
+
+               for (int j = 0; j < count; j++)
+               {
+                       weightMatrix[i][j]= GetInitialValue(type);
+                       biasVector[i][j] = GetInitialValue(type);
+               }
+           }
+       }
+   }
+
     /// <summary>
     /// Type 0 || 1: Initializes delta, weight[], and bias[].
     /// </summary>
