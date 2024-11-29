@@ -1,5 +1,6 @@
 Expand Drawing function
-Some sort of Dota 2 Creep
+Some sort of Dota 2 Creep      Rays for recongnition of visible polygons(objects)      social 2m bubble * magnitude(creep = 1.0...)
+
 
 GL & HF "I am ot sure if its over complex but i think that there is great abstraction potential for memory computation in neural netowrks"
 
