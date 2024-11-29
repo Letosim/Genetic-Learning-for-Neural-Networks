@@ -280,7 +280,7 @@ public class CNeurode : Neurode
     public override void RunForwardNested(Neurode[] parentLayer)
     {
         //Exponentiel  0 - 8  ##############################################################################################################################################################################################################
-       if (type == 0)//Feedforward needs to feed it self!!!
+           if (type == 0)//Feedforward needs to feed it self!!!
        {
            float activationValue = 0;
 
@@ -446,7 +446,7 @@ public class CNeurode : Neurode
 
                delta = Neurode.GetActivationValue(activationValueOuter, type);
            }
-       }
+       } 
         if (type == 5)//[0][n][o][i]       |      [1][n][o][i]   special >_> 
         {
             float activationValue = 0;
