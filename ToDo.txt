@@ -4,7 +4,7 @@ GL & HF "I am ot sure if its over complex but i think that there is great abstra
 
 
 //   activationValue += parentLayer[n].Delta * nestedWeightsArray[n][k][o][i] + nestedBiasesArray[n][k][o][i]; forward???                       k = index for neurodeID!? 
-//   activationValue += parentLayer[n].Delta * nestedWeightsArray[0][n][k][o][i] + nestedBiasesArray[0][n][k][o][i]; forward???
+//   activationValue += parentLayer[n].Delta * nestedWeightsArray[n][k][o][i] + nestedBiasesArray[n][k][o][i]; forward???     
 
 //   activationValue += parentLayer[n].Delta * nestedWeightsArray[0][0][n][k][o][i] + nestedBiasesArray[0][0][n][k][o][i];gate???
 //   activationValue += parentLayer[n].Delta * nestedWeightsArray[1][0][n][k][o][i] + nestedBiasesArray[1][0][n][k][o][i];//Buffer
