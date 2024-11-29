@@ -53,6 +53,38 @@ public class CNeurode : Neurode
   public float[][][][][] Weight5D { get { return weight5D; } set { weight5D = value; } }
   public float[][][][][] Bias5D { get { return bias5D; } set { bias5D = value; } }
 
+
+ /// <summary>
+ /// Type 0: Initializes delta, weight[], and bias[].
+ /// </summary>
+ public void Initiate(int localType, System.Random randomGen, NeurodeType type, int magnitudeCount)
+ {
+     if (localType == 0)
+     {
+         float delta = 0;
+         float[] weight = new float[magnitudeCount];
+         float[] bias = new float[magnitudeCount];
+     }
+     else
+         throw new ArgumentException("Invalid localType value. Only '0' is supported.", nameof(localType));
+ }
+
+ /// <summary>
+ /// Type 0: Initializes delta, weight[2][2][magnitudeCount], and bias[2][2][magnitudeCount].
+ /// </summary>
+ public void Initiate(int localType, System.Random randomGen, NeurodeType type, int magnitudeCount)
+ {
+     if (localType == 0)
+     {
+         float delta = 0;
+         float[][]   [] weight = new float[magnitudeCount];
+         float[][]   [] bias = new float[magnitudeCount];
+     }
+     else
+         throw new ArgumentException("Invalid localType value. Only '0' is supported.", nameof(localType));
+ }
+
+
     public CNeurode(int layer, int parentLayerSize, System.Random randomGen, NeurodeType type)
     {
         this.startIndexSecondGate = parentLayerSize;
