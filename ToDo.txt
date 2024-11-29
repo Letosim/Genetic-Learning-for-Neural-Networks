@@ -1,1 +1,2 @@
 Expand Drawing function
+//   activationValue += parentLayer[n].Delta * nestedWeightsArray[1][n][k][o][i] + nestedBiasesArray[1][n][k][o][i];//k = networklayers all      backwards      forwards       booth      >   logic
