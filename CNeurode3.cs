@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class CNeurode : Neurode
 {
@@ -109,205 +109,422 @@ public class CNeurode : Neurode
         }
     }
 
-   if (type == 0)//Feedforward
-  {
-      float activationValue = 0;
+    public CNeurode(System.Random randomGen, NeurodeType type, int chromosomeCount, bool isMemoryNeurode, int parentLayerSize)
+    {
+        this.delta = 0;
+        this.bias = new float[parentLayerSize];
+        this.weight = new float[parentLayerSize];
+        this.type = type;
+        this.chromosomeCount = chromosomeCount;
+        this.isMemoryNeurode = isMemoryNeurode;
 
-      for (int i = 0; i < parentLayer.Length; i++)
-          activationValue += parentLayer[i].delta * weight[i] + bias[i];
+        //Feedforward, FeedforwardMemory             if (weights[n].Length != 4)        8!!!!!!
 
-      activationValue = Neurode.GetActivationValue(activationValue, type);
 
-      if (activationValue != 0)
-          delta = activationValue;
-  }
+        if (isMemoryNeurode)// 
+        {
 
-  if (type == 1)// [0][n][o]       |      [1][n][o]
-  {
-      float activationValue = 0;
+            weights = new float[parentLayerSize][chromosomeCount * 2];
+            biases = new float[parentLayerSize][chromosomeCount * 2];
+        }
+        else
+        {
 
-      for (int n = 0; n < parentLayer.Length; n++)
-          for (int o = 0; o < weights[n].Length; o++)
-              activationValue += parentLayer[n].Delta * weightsArray[0][n][o] + biasesArray[0][n][o];
+            weights = new float[parentLayerSize][chromosomeCount];
+            biases = new float[parentLayerSize][chromosomeCount];
 
-      delta = Neurode.GetActivationValue(activationValue, type);
+        }
+        //else
+        //initiationChromosomeCount;
+        //private int memoryChromosomeCount;
 
-      if (delta != 0)
-      {
-          activationValue = 0;
+        for (int n = 0; n < parentLayerSize; n++)
+            for (int i = 0; i < chromosomeCount; i++)
+            {
+                if (type == Neurode.TanNeurode)
+                    chromosomes[n][i] = ((float)randomGen.NextDouble() - .5f) * 2f;
 
-          for (int n = 0; n < parentLayer.Length; n++)
-              for (int o = 0; o < weights[n].Length; o++)
-                  activationValue += parentLayer[n].Delta * weightsArray[1][n][o] + biasesArray[1][n][o];
+                if (type == Neurode.Sigmoid)
+                    chromosomes[n][i] = (float)randomGen.NextDouble() * .5f;
 
-          delta = Neurode.GetActivationValue(activationValue, type);
-      }
-  }
+                if (type == Neurode.Relu)
+                    chromosomes[n][i] = (float)randomGen.NextDouble();
+            }
+    }
 
-  if (type == 2)// [0][n][o][i]       |      [1][n][o][i]
-  {
-      float activationValueOuter = 0;
+    public override void RunForwardChromosome(Neurode[] parentLayer)// 4[][]
+    {
+        //Exponentiel ##############################################################################################################################################################################################################
 
-      for (int i = 0; i < deltas.Length; i++)
-      {
-          float activationValue = 0;
+        if (type == 0)//Feedforward
+        {
+            float activationValue = 0;
 
-          for (int n = 0; n < parentLayer.Length; n++)
-              for (int o = 0; o < weights[n].Length; o++)
-                  activationValue += parentLayer[n].Delta * nestedWeightsArray[0][n][o][i] + nestedBiasesArray[0][n][o][i];
+            for (int i = 0; i < parentLayer.Length; i++)
+                activationValue += parentLayer[i].delta * weight[i] + bias[i];
 
-          if (Neurode.GetActivationValue(activationValue, type) != 0)
-          {
-              for (int n = 0; n < parentLayer.Length; n++)
-                  for (int o = 0; o < weights[n].Length; o++)
-                      activationValue += parentLayer[n].Delta * nestedWeightsArray[1][n][o][i] + nestedBiasesArray[1][n][o][i];
+            activationValue = Neurode.GetActivationValue(activationValue, type);
 
-              activationValueOuter += activationValue;
-          }
-      }
+            if (activationValue != 0)
+                delta = activationValue;
+        }
 
-      delta = Neurode.GetActivationValue(activationValueOuter, type)
-  }
+        if (type == 1)//Feedforward Buffered
+        {
+            float activationValue = 0;
 
-  if (type == 3)//[0][n][o][i]Buffered       |      [1][n][o][i]   special >_> 
-  {
-      float activationValue = 0;
+            for (int i = 0; i < parentLayer.Length; i++)
+                activationValue += parentLayer[i].delta * weight[i] + bias[i];
 
-      for (int i = 0; i < deltas.Length; i++)
-      {
-          for (int n = 0; n < parentLayer.Length; n++)
-              for (int o = 0; o < weights[n].Length; o++)
-                  activationValue += parentLayer[n].Delta * nestedWeightsArray[0][n][o][i] + nestedBiasesArray[0][n][o][i];
+            delta = Neurode.GetActivationValue(activationValue, type); //Buffered Value
 
-          deltas[i] = Neurode.GetActivationValue(activationValue, type);
-      }
+            if (activationValue != 0)
+                delta = activationValue;
+        }
 
-      for (int i = 1; i < deltas.Length - 1; i++)
-          deltas[0] += deltas[i];
+        if (type == 2)// [0][n][o]       |      [1][n][o]
+        {
+            float activationValue = 0;
 
-      delta = Neurode.GetActivationValue(deltas[0], type);//buffer first value..... les go......
+            for (int n = 0; n < parentLayer.Length; n++)
+                for (int o = 0; o < weights[n].Length; o++)
+                    activationValue += parentLayer[n].Delta * weightsArray[0][n][o] + biasesArray[0][n][o];
 
-      if (delta != 0)
-      {
-          for (int i = 0; i < deltas.Length; i++)
-          {
-              for (int n = 0; n < parentLayer.Length; n++)
-                  for (int o = 0; o < weights[n].Length; o++)
-                      activationValue += parentLayer[n].Delta * nestedWeightsArray[1][n][o][i] + nestedBiasesArray[1][n][o][i];
+            delta = Neurode.GetActivationValue(activationValue, type);
 
-              deltas[i] = Neurode.GetActivationValue(activationValue, type);
-          }
+            if (delta != 0)
+            {
+                activationValue = 0;
 
-          for (int i = 1; i < deltas.Length - 1; i++)
-              deltas[0] += deltas[i];
+                for (int n = 0; n < parentLayer.Length; n++)
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += parentLayer[n].Delta * weightsArray[1][n][o] + biasesArray[1][n][o];
 
-          delta = Neurode.GetActivationValue(deltas[0], type);
-      }
-  }
+                delta = Neurode.GetActivationValue(activationValue, type);
+            }
+        }
 
-  if (type == 4)// [0][0][n][o][i] [0][1][n][o][i]          |         [1][0][n][o][i] [1][1][n][o][i]
-  {
-      float activationValueOuter = 0;
+        if (type == 3)// [0][n][o][i]       |      [1][n][o][i]
+        {
+            float activationValueOuter = 0;
 
-      for (int i = 0; i < deltas.Length; i++)
-      {
-          float activationValue = 0;
+            for (int i = 0; i < deltas.Length; i++)
+            {
+                float activationValue = 0;
 
-          for (int n = 0; n < parentLayer.Length; n++)
-              for (int o = 0; o < weights[n].Length; o++)
-                  activationValue += parentLayer[n].Delta * nestedWeightsArray[0][0][n][o][i] + nestedBiasesArray[0][0][n][o][i];
+                for (int n = 0; n < parentLayer.Length; n++)
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += parentLayer[n].Delta * nestedWeightsArray[0][n][o][i] + nestedBiasesArray[0][n][o][i];
 
-          if (Neurode.GetActivationValue(activationValue, type) != 0)
-          {
-              for (int n = 0; n < parentLayer.Length; n++)
-                  for (int o = 0; o < weights[n].Length; o++)
-                      activationValue += parentLayer[n].Delta * nestedWeightsArray[0][1][n][o][i] + nestedBiasesArray[0][1][n][o][i];
+                if (Neurode.GetActivationValue(activationValue, type) != 0)
+                {
+                    for (int n = 0; n < parentLayer.Length; n++)
+                        for (int o = 0; o < weights[n].Length; o++)
+                            activationValue += parentLayer[n].Delta * nestedWeightsArray[1][n][o][i] + nestedBiasesArray[1][n][o][i];
 
-              activationValueOuter += activationValue;
-          }
-      }
+                    activationValueOuter += activationValue;
+                }
+            }
 
-      //activationValueOuter = Neurode.GetActivationValue(activationValueOuter, type);
+            delta = Neurode.GetActivationValue(activationValueOuter, type)
+        }
 
-      if (Neurode.GetActivationValue(activationValueOuter, type) != 0)
-      {
-          activationValueOuter = 0;
 
-          for (int i = 0; i < deltas.Length; i++)
-          {
-              float activationValue = 0;
+        if (type == 4)// [0][n][o][i]Buffered       |      [1][n][o][i]
+        {
+            float activationValueOuter = 0;
 
-              for (int n = 0; n < parentLayer.Length; n++)
-                  for (int o = 0; o < weights[n].Length; o++)
-                      activationValue += parentLayer[n].Delta * nestedWeightsArray[1][0][n][o][i] + nestedBiasesArray[1][0][n][o][i];
+            for (int i = 0; i < deltas.Length; i++)
+            {
+                float activationValue = 0;
 
-              if (Neurode.GetActivationValue(activationValue, type) != 0)
-              {
-                  for (int n = 0; n < parentLayer.Length; n++)
-                      for (int o = 0; o < weights[n].Length; o++)
-                          activationValue += parentLayer[n].Delta * nestedWeightsArray[1][1][n][o][i] + nestedBiasesArray[1][1][n][o][i];
+                for (int n = 0; n < parentLayer.Length; n++)
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += parentLayer[n].Delta * nestedWeightsArray[0][n][o][i] + nestedBiasesArray[0][n][o][i];
 
-                  activationValueOuter += activationValue;
-              }
-          }
+                delta = Neurode.GetActivationValue(activationValueOuter, type);//Buffer
 
-          delta = Neurode.GetActivationValue(activationValueOuter, type);
-      }
-      else
-          delta = 0;
-  }
+                if (delta != 0)
+                {
+                    for (int n = 0; n < parentLayer.Length; n++)
+                        for (int o = 0; o < weights[n].Length; o++)
+                            activationValue += parentLayer[n].Delta * nestedWeightsArray[1][n][o][i] + nestedBiasesArray[1][n][o][i];
 
-  if(type == 5)// [0][0][n][o][i] [0][1][n][o][i]Buffered          |         [1][0][n][o][i] [1][1][n][o][i]
-  {
-      float activationValueOuter = 0;
+                    activationValueOuter += activationValue;
+                }
+            }
 
-      for (int i = 0; i < deltas.Length; i++)
-      {
-          float activationValue = 0;
+            delta = Neurode.GetActivationValue(activationValueOuter, type)
+        }
 
-          for (int n = 0; n < parentLayer.Length; n++)
-              for (int o = 0; o < weights[n].Length; o++)
-                  activationValue += parentLayer[n].Delta * nestedWeightsArray[0][0][n][o][i] + nestedBiasesArray[0][0][n][o][i];
+        if (type == 5)// [0][0][n][o][i] [0][1][n][o][i]          |         [1][0][n][o][i] [1][1][n][o][i]
+        {
+            float activationValueOuter = 0;
 
-          if (Neurode.GetActivationValue(activationValue, type) != 0)
-          {
-              for (int n = 0; n < parentLayer.Length; n++)
-                  for (int o = 0; o < weights[n].Length; o++)
-                      activationValue += parentLayer[n].Delta * nestedWeightsArray[0][1][n][o][i] + nestedBiasesArray[0][1][n][o][i];
+            for (int i = 0; i < deltas.Length; i++)
+            {
+                float activationValue = 0;
 
-              activationValueOuter += activationValue;
-          }
-      }
+                for (int n = 0; n < parentLayer.Length; n++)
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += parentLayer[n].Delta * nestedWeightsArray[0][0][n][o][i] + nestedBiasesArray[0][0][n][o][i];
 
-      delta = Neurode.GetActivationValue(activationValueOuter, type);
+                if (Neurode.GetActivationValue(activationValue, type) != 0)
+                {
+                    for (int n = 0; n < parentLayer.Length; n++)
+                        for (int o = 0; o < weights[n].Length; o++)
+                            activationValue += parentLayer[n].Delta * nestedWeightsArray[0][1][n][o][i] + nestedBiasesArray[0][1][n][o][i];
 
-      if (Neurode.GetActivationValue(activationValueOuter, type) != 0)
-      {
-          activationValueOuter = 0;
+                    activationValueOuter += activationValue;
+                }
+            }
 
-          for (int i = 0; i < deltas.Length; i++)
-          {
-              float activationValue = 0;
+            if (Neurode.GetActivationValue(activationValueOuter, type) != 0)
+            {
+                activationValueOuter = 0;
 
-              for (int n = 0; n < parentLayer.Length; n++)
-                  for (int o = 0; o < weights[n].Length; o++)
-                      activationValue += parentLayer[n].Delta * nestedWeightsArray[1][0][n][o][i] + nestedBiasesArray[1][0][n][o][i];
+                for (int i = 0; i < deltas.Length; i++)
+                {
+                    float activationValue = 0;
 
-              if (Neurode.GetActivationValue(activationValue, type) != 0)
-              {
-                  for (int n = 0; n < parentLayer.Length; n++)
-                      for (int o = 0; o < weights[n].Length; o++)
-                          activationValue += parentLayer[n].Delta * nestedWeightsArray[1][1][n][o][i] + nestedBiasesArray[1][1][n][o][i];
+                    for (int n = 0; n < parentLayer.Length; n++)
+                        for (int o = 0; o < weights[n].Length; o++)
+                            activationValue += parentLayer[n].Delta * nestedWeightsArray[1][0][n][o][i] + nestedBiasesArray[1][0][n][o][i];
 
-                  activationValueOuter += activationValue;
-              }
-          }
+                    if (Neurode.GetActivationValue(activationValue, type) != 0)
+                    {
+                        for (int n = 0; n < parentLayer.Length; n++)
+                            for (int o = 0; o < weights[n].Length; o++)
+                                activationValue += parentLayer[n].Delta * nestedWeightsArray[1][1][n][o][i] + nestedBiasesArray[1][1][n][o][i];
 
-          delta = Neurode.GetActivationValue(activationValueOuter, type);
-      }
-      else
-          delta = 0;
-  }
+                        activationValueOuter += activationValue;
+                    }
+                }
+
+                delta = Neurode.GetActivationValue(activationValueOuter, type);
+            }
+            else
+                delta = 0;
+        }
+
+        if(type == 6)// [0][0][n][o][i] [0][1][n][o][i]Buffered          |         [1][0][n][o][i] [1][1][n][o][i]
+        {
+            float activationValueOuter = 0;
+
+            for (int i = 0; i < deltas.Length; i++)
+            {
+                float activationValue = 0;
+
+                for (int n = 0; n < parentLayer.Length; n++)
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += parentLayer[n].Delta * nestedWeightsArray[0][0][n][o][i] + nestedBiasesArray[0][0][n][o][i];
+
+                if (Neurode.GetActivationValue(activationValue, type) != 0)
+                {
+                    for (int n = 0; n < parentLayer.Length; n++)
+                        for (int o = 0; o < weights[n].Length; o++)
+                            activationValue += parentLayer[n].Delta * nestedWeightsArray[0][1][n][o][i] + nestedBiasesArray[0][1][n][o][i];
+
+                    activationValueOuter += activationValue;
+                }
+            }
+
+            delta = Neurode.GetActivationValue(activationValueOuter, type);//Buffer
+
+            if (Neurode.GetActivationValue(activationValueOuter, type) != 0)
+            {
+                activationValueOuter = 0;
+
+                for (int i = 0; i < deltas.Length; i++)
+                {
+                    float activationValue = 0;
+
+                    for (int n = 0; n < parentLayer.Length; n++)
+                        for (int o = 0; o < weights[n].Length; o++)
+                            activationValue += parentLayer[n].Delta * nestedWeightsArray[1][0][n][o][i] + nestedBiasesArray[1][0][n][o][i];
+
+                    if (Neurode.GetActivationValue(activationValue, type) != 0)
+                    {
+                        for (int n = 0; n < parentLayer.Length; n++)
+                            for (int o = 0; o < weights[n].Length; o++)
+                                activationValue += parentLayer[n].Delta * nestedWeightsArray[1][1][n][o][i] + nestedBiasesArray[1][1][n][o][i];
+
+                        activationValueOuter += activationValue;
+                    }
+                }
+
+                delta = Neurode.GetActivationValue(activationValueOuter, type);
+            }
+            else
+                delta = 0;
+        }
+
+        if (type == 7)//[0][n][o][i]       |      [1][n][o][i]   special >_> 
+        {
+            float activationValue = 0;
+
+            for (int i = 0; i < deltas.Length; i++)
+            {
+                for (int n = 0; n < parentLayer.Length; n++)
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += parentLayer[n].Delta * nestedWeightsArray[0][n][o][i] + nestedBiasesArray[0][n][o][i];
+
+                deltas[i] = Neurode.GetActivationValue(activationValue, type);
+            }
+
+            for (int i = 1; i < deltas.Length - 1; i++)
+                deltas[0] += deltas[i];
+
+            if (Neurode.GetActivationValue(deltas[0], type) != 0)
+            {
+                for (int i = 0; i < deltas.Length; i++)
+                {
+                    for (int n = 0; n < parentLayer.Length; n++)
+                        for (int o = 0; o < weights[n].Length; o++)
+                            activationValue += parentLayer[n].Delta * nestedWeightsArray[1][n][o][i] + nestedBiasesArray[1][n][o][i];
+
+                    deltas[i] = Neurode.GetActivationValue(activationValue, type);
+                }
+
+                for (int i = 1; i < deltas.Length - 1; i++)
+                    deltas[0] += deltas[i];
+
+                delta = Neurode.GetActivationValue(deltas[0], type);
+            }
+        }
+
+        if (type == 8)//[0][n][o][i]Buffered       |      [1][n][o][i]   special >_> 
+        {
+            float activationValue = 0;
+
+            for (int i = 0; i < deltas.Length; i++)
+            {
+                for (int n = 0; n < parentLayer.Length; n++)
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += parentLayer[n].Delta * nestedWeightsArray[0][n][o][i] + nestedBiasesArray[0][n][o][i];
+
+                deltas[i] = Neurode.GetActivationValue(activationValue, type);
+            }
+
+            for (int i = 1; i < deltas.Length - 1; i++)
+                deltas[0] += deltas[i];
+
+            delta = Neurode.GetActivationValue(deltas[0], type);//buffer first value.....
+
+            if (delta != 0)
+            {
+                for (int i = 0; i < deltas.Length; i++)
+                {
+                    for (int n = 0; n < parentLayer.Length; n++)
+                        for (int o = 0; o < weights[n].Length; o++)
+                            activationValue += parentLayer[n].Delta * nestedWeightsArray[1][n][o][i] + nestedBiasesArray[1][n][o][i];
+
+                    deltas[i] = Neurode.GetActivationValue(activationValue, type);
+                }
+
+                for (int i = 1; i < deltas.Length - 1; i++)
+                    deltas[0] += deltas[i];
+
+                delta = Neurode.GetActivationValue(deltas[0], type);
+            }
+        }
+
+        //Linear ###################################################################################################################################################################################################################
+
+        if (type == 5)
+        {
+            float activationCounter = 0;
+
+            for (int i = 0; i < deltas.Length; i++)
+            {
+                float activationValue = 0;
+
+                for (int n = 0; n < parentLayer.Length; n++)
+                {
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += parentLayer[n].Delta * nestedWeightsArray[0][n][o][i] + nestedBiasesArray[0][n][o][i];
+
+                    if (Neurode.GetActivationValue(activationValue, type) != 0) ;
+                        activationCount++;
+                }
+
+
+                if (Neurode.GetActivationValue(activationCount, type) != 0)
+                {
+                    activationCount = 0;
+
+                    for (int i = 0; i < deltas.Length; i++)
+                    {
+                        for (int n = 0; n < parentLayer.Length; n++)
+                        {
+                            for (int o = 0; o < weights[n].Length; o++)
+                                activationValue += parentLayer[n].Delta * nestedWeightsArray[1][n][o][i] + nestedBiasesArray[1][n][o][i];
+
+                            if (Neurode.GetActivationValue(activationValue, type) != 0) ;
+                                activationCount++;
+                        }
+                    }
+
+                    delta = Neurode.GetActivationValue(activationCount, type);
+                }
+                else
+                    delta = 0;
+            }
+        }
+
+        if (type == 6)// linear 2
+        {
+            float activationValueOuter = 0;
+
+            for (int i = 0; i < deltas.Length; i++)
+            {
+                float activationValue = 0;
+
+                for (int n = 0; n < parentLayer.Length; n++)
+                    for (int o = 0; o < weights[n].Length; o++)
+                        activationValue += parentLayer[n].Delta * nestedWeightsArray[0][0][n][o][i] + nestedBiasesArray[0][0][n][o][i];
+
+                if (Neurode.GetActivationValue(activationValue, type) != 0)
+                {
+                    for (int n = 0; n < parentLayer.Length; n++)
+                        for (int o = 0; o < weights[n].Length; o++)
+                            activationValue += parentLayer[n].Delta * nestedWeightsArray[0][1][n][o][i] + nestedBiasesArray[0][1][n][o][i];
+
+                    activationValueOuter += activationValue;
+                }
+            }
+
+            //activationValueOuter = Neurode.GetActivationValue(activationValueOuter, type);
+
+            if (Neurode.GetActivationValue(activationValueOuter, type) != 0)
+            {
+                activationValueOuter = 0;
+
+                for (int i = 0; i < deltas.Length; i++)
+                {
+                    float activationValue = 0;
+
+                    for (int n = 0; n < parentLayer.Length; n++)
+                        for (int o = 0; o < weights[n].Length; o++)
+                            activationValue += parentLayer[n].Delta * nestedWeightsArray[1][0][n][o][i] + nestedBiasesArray[1][0][n][o][i];
+
+                    if (Neurode.GetActivationValue(activationValue, type) != 0)
+                    {
+                        for (int n = 0; n < parentLayer.Length; n++)
+                            for (int o = 0; o < weights[n].Length; o++)
+                                activationValue += parentLayer[n].Delta * nestedWeightsArray[1][1][n][o][i] + nestedBiasesArray[1][1][n][o][i];
+
+                        activationValueOuter += activationValue;
+                    }
+                }
+
+                delta = Neurode.GetActivationValue(activationValueOuter, type);
+            }
+            else
+                delta = 0;
+        }
+
+    }
 
     public override void RunForward(Neurode[] parentLayer)
     {
