@@ -16,8 +16,8 @@ public class CNeurode : Neurode
 
     private float[][][] weightsArray;
     private float[][][] biasesArray;
-    private float[][][] NestedWeightsArray;
-    private float[][][] NestedBiasesArray;
+    private float[][][][] nestedWeightsArray;
+    private float[][][][] nestedBiasesArray;
 
     public override float[][] DeltasArray { get { return delta; } set { delta = value; } }
     public override float[][][] WeightsArray { get { return weights; } set { weights = value; } }
