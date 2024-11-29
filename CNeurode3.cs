@@ -180,14 +180,13 @@ public class CNeurode : Neurode
 
             delta = Neurode.GetActivationValue(activationValue, type);
         }
-
     }
 
-    public override void RunForwardChromosome(Neurode[] parentLayer)
+    public override void RunForwardNested(Neurode[] parentLayer)
     {
         //Exponentiel ##############################################################################################################################################################################################################
 
-        if (type == 0)//Feedforward
+        if (type == 0)//Feedforward needs to feed it self!!!
         {
             float activationValue = 0;
 
@@ -463,7 +462,7 @@ public class CNeurode : Neurode
         //Linear ###################################################################################################################################################################################################################
 
 
-        if (type == 9)//Feedforward
+        if (type == 9)//Feedforward needs to feed it self???
         {
             float activationValue = 0;
             float activationCount = 0;
