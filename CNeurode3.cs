@@ -184,7 +184,7 @@ public class CNeurode : Neurode
 
     public override void RunForwardNested(Neurode[] parentLayer)
     {
-        //Exponentiel ##############################################################################################################################################################################################################
+        //Exponentiel  0 - 8  ##############################################################################################################################################################################################################
 
         if (type == 0)//Feedforward needs to feed it self!!!
         {
@@ -447,7 +447,7 @@ public class CNeurode : Neurode
                 {
                     for (int n = 0; n < parentLayer.Length; n++)
                         for (int o = 0; o < weights[n].Length; o++)
-                            activationValue += parentLayer[n].Delta * nestedWeightsArray[1][n][o][i] + nestedBiasesArray[1][n][o][i];
+                            activationValue += parentLayer[n].Delta * nestedWeightsArray[1][n][o][i] + nestedBiasesArray[1][n][o][i];//all      backwards      forwards       booth
 
                     deltas[i] = Neurode.GetActivationValue(activationValue, type);
                 }
@@ -459,10 +459,12 @@ public class CNeurode : Neurode
             }
         }
 
-        //Linear ###################################################################################################################################################################################################################
+        //   activationValue += parentLayer[n].Delta * nestedWeightsArray[1][n][k][o][i] + nestedBiasesArray[1][n][k][o][i];//k = networklayers all      backwards      forwards       booth
+
+        //Linear 10 - 18 ###################################################################################################################################################################################################################
 
 
-        if (type == 9)//Feedforward needs to feed it self???
+        if (type == 10)//Feedforward needs to feed it self!!!
         {
             float activationValue = 0;
             float activationCount = 0;
@@ -477,7 +479,7 @@ public class CNeurode : Neurode
                 delta = activationValue;
         }
 
-        if (type == 10)//Feedforward Buffered
+        if (type == 11)//Feedforward Buffered
         {
             float activationValue = 0;
             float activationCount = 0;
@@ -493,7 +495,7 @@ public class CNeurode : Neurode
                 delta = activationValue;
         }
 
-        if (type == 11)
+        if (type == 12)
         {
             float activationCounter = 0;
 
@@ -534,7 +536,7 @@ public class CNeurode : Neurode
             }
         }
 
-        if (type == 12)// linear 2
+        if (type == 13)// linear 2
         {
             float activationValueOuter = 0;
 
