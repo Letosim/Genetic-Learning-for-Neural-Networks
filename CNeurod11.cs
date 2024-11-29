@@ -1159,7 +1159,7 @@ public class CNeurode
             }
     }
 
-    public Neurode Merge(Neurode neurodeA, Neurode neurodeB, MergeType type)
+    public CNeurode Merge(Neurode neurodeA, Neurode neurodeB, MergeType type)
     {
         throw new System.NotImplementedException();
     }
