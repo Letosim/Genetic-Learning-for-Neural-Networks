@@ -515,9 +515,8 @@ public class CNeurode
     }
 
 
-    public void AlterNeurode(CNeurode baseNeurode, float alternation, System.Random randomGen)
+      public void AlterNeurode(CNeurode baseNeurode, float alternation, System.Random randomGen
     {
-
         // Buffer.txt       fitness incerease       |------------------|---------|
         for (int v = 0; v < vectorCount; v++)//Smooth
         {
@@ -538,6 +537,30 @@ public class CNeurode
         }
     }
 
+    public void AlterNeurode(CNeurode baseNeurode, Buffer buffer, System.Random randomGen, float fitness, float maxFitness)
+    {
+        if (fitness > previesFitness) {
+            fitness = previesFitness;
+        }
+
+        // Buffer.txt       fitness incerease       |------------------|---------|
+        for (int v = 0; v < vectorCount; v++)//Smooth
+        {
+            weight[v] = weight[v] * (.5f - (float)randomGen.NextDouble()) * buffer.Compute(1,  previesFitness / maxFitness);
+            bias[v] = bias[v] * (.5f - (float)randomGen.NextDouble()) * alternation;
+        }
+
+        for (int v = 0; v < vectorCount; v++)//Scale
+        {
+            weight[v] = weight[v] * (.5f - (float)randomGen.NextDouble()) * alternation;
+            bias[v] = bias[v] + (.5f - (float)randomGen.NextDouble()) * alternation;
+        }
+
+        for (int v = 0; v < vectorCount; v++)//Noise
+        {
+            weight[v] = weight[v] + (.5f - (float)randomGen.NextDouble()) * alternation;
+            bias[v] = bias[v] + (.5f - (float)randomGen.NextDouble()) * alternation;
+        }
     public void ClampBiases(CNeurode partnerNeurode)
     {
         if (ChromosomeCount == 0)
