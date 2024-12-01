@@ -8,7 +8,9 @@ public class NeurodeTree : MonoBehaviour
     //grid.... :/
 
     public int NeurodeCount;
-
+    //creep     (rays[])    (proixmity)[]   (stats[])   (Core)
+    //List<array[]>;
+    
     int[] oneDArray = { 1, 2, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4,
         5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6 };
 
