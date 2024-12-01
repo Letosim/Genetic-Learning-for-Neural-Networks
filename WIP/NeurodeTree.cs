@@ -8,7 +8,7 @@ public class NeurodeTree : MonoBehaviour
     //grid.... :/
 
     public int NeurodeCount;
-    //creep     (rays[])    (proixmity)[]   (stats[])   (Core)
+    //creep     (rays[])    (proixmity)[]   (stats[])   (Core)            gets "angry" on respawn!? XD
     //List<array[]>;
     
     int[] oneDArray = { 1, 2, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4,
