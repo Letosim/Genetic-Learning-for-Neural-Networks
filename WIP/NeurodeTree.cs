@@ -13,8 +13,8 @@ public class NeurodeTree : MonoBehaviour
 //                                                                                                           in/out
 //                                                                                                             |
 //                                                                                                     [       |          ]
-//[[count][type 1-3]] <-link-> [[count][type 0-3]]                       [[[count][type 1-3]] <-link-> [[count][type 1-3]]]  <-link->  [[[count][type 1-3]] <-link-> [[count][type 1-3]]]    // 0 possible over the network / neurode array
-//[[count][type 0-3]] <-link-> [[count][type 0-3]]                       [[[count][type 0-3]] <-link-> [[count][type 0-3]]]  <-link->  [[[count][type 0-3]] <-link-> [[count][type 0-3]]]
+//[[count][type 1-3]] <-link-> [[count][type 0-3]]                       [[[count][type 1-3]] <-link-> [[count][type 1-3]]]  <-link->  [[[count][type 1-3]] <-link-> [[count][type 1-3]]]
+
 
 
     int[] oneDArray = { 1, 2, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4,
