@@ -10,9 +10,9 @@ public class NeurodeTree : MonoBehaviour
     public int NeurodeCount;
     //creep     (rays[])    (proixmity)[]   (stats[])   (Core)            gets "angry" on respawn!? XD
     //List<array[]>;
-//                                                                                             in/out?
-//                                                                                               |
-//                                                                                               |
+//                                                                                                           in/out?
+//                                                                                                             |
+//                                                                                                             |
 //[[count][type 1-3]] <-link-> [[count][type 1-3]]                       [[[count][type 1-3]] <-link-> [[count][type 1-3]]]  <-link->  [[[count][type 1-3]] <-link-> [[count][type 1-3]]]
     int[] oneDArray = { 1, 2, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4,
         5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6 };
