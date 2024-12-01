@@ -12,7 +12,7 @@ public class NeurodeTree : MonoBehaviour
     //List<array[]>;
 //                                                                                                           in/out?
 //                                                                                                             |
-//                                                                                                             |
+//                                                                                                     [       |          ]
 //[[count][type 1-3]] <-link-> [[count][type 1-3]]                       [[[count][type 1-3]] <-link-> [[count][type 1-3]]]  <-link->  [[[count][type 1-3]] <-link-> [[count][type 1-3]]]
     int[] oneDArray = { 1, 2, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4,
         5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6, 3, 4, 5, 6 };
