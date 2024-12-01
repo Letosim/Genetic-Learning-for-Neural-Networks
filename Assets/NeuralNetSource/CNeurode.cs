@@ -139,7 +139,7 @@ public class CNeurode
             {
                 activationValue = System.Math.Max(0, activationValue);
 
-                if (activationValue >= lowerThresholdReLu && activationValue <= upperThresholdReLu)
+                if (activationValue >= lowerThresholdReLu && activationValue <= upperThresholdReLu)|-------------------|--------|
                     return activationValue;
                 else
                     return 0;
