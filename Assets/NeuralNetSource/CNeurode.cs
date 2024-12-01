@@ -266,7 +266,7 @@ public class CNeurode
             }
         }
 
-        if (localType == 3)//                                                                                        [>>]
+        if (localType == 3)//                                                                                        [>>  ||  |>]
         {
             float activationValue = 0;
 
