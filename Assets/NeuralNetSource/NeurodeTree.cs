@@ -9,7 +9,6 @@ public class NeurodeTree : MonoBehaviour
 
     private int neurodeCount;
 
-    public int[] Nets;
     public int[]Vector2Int neurodeDistribution;   //Count Type
 
 
