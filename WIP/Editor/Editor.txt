@@ -1,0 +1,1 @@
+Some sort of VR3D setup environment would be better but currently trying to implement some sort of editor "api" for easyer setup then using arrays and the NetworkTest.
