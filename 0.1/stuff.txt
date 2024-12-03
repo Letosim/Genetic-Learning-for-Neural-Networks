@@ -1,0 +1,71 @@
+//0	[>]   Reset value [>]
+//1	[>>]  Keep value til next activation [>>]
+//2	[...] Keep gateValue/activationValue if(GetActivationValue() == 0) [...]
+//
+//3	[0][n][o] | [1][n][o]    &&    [>]
+//4	[0][n][o] | [1][n][o]    &&    [>>]
+//5	[0][n][o] | [1][n][o]    &&    [...]
+//
+//6	[0][o] [0][o] | [1][o] [1][o]    |    [2][o] [2][o] | [3][o] [3][o]    &&    [>]
+//7	[0][o] [0][o] | [1][o] [1][o]    |    [2][o] [2][o] | [3][o] [3][o]    &&    [>>]
+//8	[0][o] [0][o] | [1][o] [1][o]    |    [2][o] [2][o] | [3][o] [3][o]    &&    [...]
+//
+//9	Linear    &&    [>]
+//10	Linear    &&    [>>]
+//11	Linear    &&    [...]
+//
+//12	[0][o] [0][o]      |     [1][o] [1][o]    &&    [>]
+//13	[0][o] [0][o]      |     [1][o] [1][o]    &&    [>>]
+//14	[0][o] [0][o]      |     [1][o] [1][o]    &&    [...]
+//
+//15	[k] * ([0][o] [0][o] | [1][o] [1][o])    |    [k] * ([2][o] [2][o] | [3][o] [3][o])    &&    [>]
+//16	[k] * ([0][o] [0][o] | [1][o] [1][o])    |    [k] * ([2][o] [2][o] | [3][o] [3][o])    &&    [>>]
+//17	[k] * ([0][o] [0][o] | [1][o] [1][o])    |    [k] * ([2][o] [2][o] | [3][o] [3][o])    &&    [...]
+//social 2m bubble * magnitude
+
+
+
+// 	network[][].Delta = Neurodes[][indexes[k]]; k = index for neurodeID!? >_>
+// 	private int[] vectorCount = 0;
+//
+//public void RunForward(List<CNeurode> neurodes, List<int> k)
+//{
+//    for (int n = 0; n < k.Count; n++)
+//        for (int v = 0; v < vectorCount; v++)
+//            activationValue += neurodes[k[n]].delta * weight[v] + bias[v];
+//}
+//public void RunForwardSpan(List<CNeurode> neurodes)
+//{
+//    for (int n = 0; n < k.Count; n++)
+//        for (int v = 0; v < vectorCount; v++)
+//            activationValue += neurodes[k[n]].delta * weight[v] + bias[v];
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Three generations
+//    Up (u),
+//    Down (d)
+//    Charm (c),
+//    Strange (s)
+//    Top (t),
+//    Bottom (b)
