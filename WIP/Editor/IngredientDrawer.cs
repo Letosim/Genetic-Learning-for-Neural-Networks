@@ -44,10 +44,10 @@ public class InterfaceNode
 
     //Vector3Int        count type link/id              In->             <(->  ->  ->)> 
     
-    //Vector3Int        count type link/id              ->            
-    //Vector3Int        count type link/id              ->             
-    //Vector3Int        count type link/id              ->             
-    //Vector3Int        count type link/id              -Out             
+    //Vector3Int        count type link/id??              ->            
+    //Vector3Int        count type link/id??              ->             
+    //Vector3Int        count type link/id??              ->             
+    //Vector3Int        count type link/id??              -Out             
 
 
 }
