@@ -42,7 +42,7 @@ public enum IngredientUnit { Spoon, Cup, Bowl, Piece }
 public class InterfaceNode
 {
 
-    //Vector3Int        count type link/id              In->             <(->  ->  ->)> 
+    //Vector3Int        count type link/id?!              In->             <(->  ->  ->)> 
     
     //Vector3Int        count type link/id??              ->            
     //Vector3Int        count type link/id??              ->             
