@@ -75,7 +75,7 @@
 
 
 
-//Three generations
+//Three generations    if not pure random...
 //    Up (u),
 //    Down (d)
 //    Charm (c),
