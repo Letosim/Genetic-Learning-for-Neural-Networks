@@ -78,7 +78,7 @@
 //Three generations    if not pure random...
 
 
-//   	< Up (u), <
+//   	> Up (u), >
 		|
 		.
 		.
@@ -88,3 +88,5 @@
 //    Strange (s)
 //    Top (t),
 //    Bottom (b)
+
+
