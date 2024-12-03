@@ -47,7 +47,7 @@ public class InterfaceNode
     //Vector3Int        type link/id??              ->            
     //Vector3Int        type link/id??              ->             
     //Vector3Int        type link/id??              ->             
-    //Vector3Int        type link/id??              -Out             
+    //Vector3Int        type link/id??              ->Out             
 
 
 }
