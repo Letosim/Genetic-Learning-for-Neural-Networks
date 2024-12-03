@@ -38,6 +38,20 @@ public class IngredientDrawer : PropertyDrawer  //Costum drawer         Inherits
 
 public enum IngredientUnit { Spoon, Cup, Bowl, Piece }
 
+[Serializable]
+public class InterfaceNode
+{
+
+    //Vector3Int        count type link/id              In->             <(->  ->  ->)> 
+    
+    //Vector3Int        count type link/id              ->            
+    //Vector3Int        count type link/id              ->             
+    //Vector3Int        count type link/id              ->             
+    //Vector3Int        count type link/id              -Out             
+
+
+}
+
 // Custom serializable class
 [Serializable]
 public class Ingredient
