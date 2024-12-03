@@ -76,9 +76,12 @@
 
 
 //Three generations    if not pure random...
+0
 //    Up (u),
 //    Down (d)
+1
 //    Charm (c),
 //    Strange (s)
+2
 //    Top (t),
 //    Bottom (b)
