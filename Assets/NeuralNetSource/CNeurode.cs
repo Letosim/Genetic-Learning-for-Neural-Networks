@@ -576,6 +576,8 @@ public class CNeurode
             }
         }
         
+
+       A(weightA wright) *> weightA = A * stuff >_>
         //ClampBiases();
     }
 
