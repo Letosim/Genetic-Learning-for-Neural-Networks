@@ -416,11 +416,18 @@ public class NeuralNetwork
 
 
 
-public void DrawConnections(List<NeuralNetwork> networks, List<int> linknodes)
+public void DrawConnections(List<NeuralNetwork> networks, List[][][] linkNodes)
     {
 
+for (int o = 0; o < networks; o++)
+{
+   Vector3 dir = networks[linknodes[o][0]].neurodes[linknodes[o][1]].position - networks[linknodes[o][2]].neurodes[linknodes[o][3]].position;
 
-    for (int o = 0; o < networks.Count; o++)
+//linkNodes
+}
+
+
+    
         for (int i = 0; i < neurodes.Length; i++)
             for (int n = 0; n < neurodes[i].Length; n++)
             {
