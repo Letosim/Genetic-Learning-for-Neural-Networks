@@ -414,17 +414,25 @@ public class NeuralNetwork
         [SerializeField] public int shortMemoryExitStartIndex = 0;
     }
 
-
+//List<Vector3> positions;
 
 public void DrawConnections(List<NeuralNetwork> networks, List[][][] linkNodes)
     {
+   //     positions.Add(new Vector3.zero);
 
-for (int o = 0; o < networks; o++)
-{
-   Vector3 dir = networks[linknodes[o][0]].neurodes[linknodes[o][1]].position - networks[linknodes[o][2]].neurodes[linknodes[o][3]].position;
+   //     Vector3 position = new Vector3((float)randomGen.GetNext() * 30f, (float)randomGen.GetNext() * 30f, (float)randomGen.GetNext() * 30f);
 
-//linkNodes
-}
+   //     for (int o = 0; o < networks; o++)
+   //     {
+            
+   //        Vector3 dir = networks[linknodes[o][0]].neurodes[linknodes[o][1]].position - networks[linknodes[o][2]].neurodes[linknodes[o][3]].position;
+            //if !hitplane
+
+            //if distance < maxsize
+            //postions.Add(position);
+
+        //linkNodes
+   //     }
 
 
     
