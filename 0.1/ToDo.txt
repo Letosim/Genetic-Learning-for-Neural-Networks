@@ -49,7 +49,7 @@ GL & HF "I am ot sure if its over complex but i think that there is great abstra
 
 
 //   This is where the Dragons sleep  >_>
-
+//   Limina name!!
 //   activationValue += parentLayer[n].Delta * nestedWeightsArray[0][0][n][k][o][i] + nestedBiasesArray[0][0][n][k][o][i];gate???  //activationValue(Buffer.txt) += parentLayer[n].Delta * nestedWeightsArray[0][0][n][indexes[k]]][o][i] + nestedBiasesArray[0][0][n][neurodes[indexes[k]]][o][i]; k = index for neurodeID!?
 //   activationValue += parentLayer[n].Delta * nestedWeightsArray[1][0][n][k][o][i] + nestedBiasesArray[1][0][n][k][o][i];//Buffer  //activationValue(Buffer.txt) += parentLayer[n].Delta * nestedWeightsArray[1][0][n][indexes[k]]][o][i] + nestedBiasesArray[1][0][n][neurodes[indexes[k]]][o][i]; k = index for 
 //   (??  >   logic <3)  ?????? activationValue += parentLayer[n].Delta * nestedWeightsArray[n][indexes[k]]][o][i] + nestedBiasesArray[n][neurodes[indexes[k]]][o][i]; forward??? k = index for neurodeID!? K logic < back loop ??????
