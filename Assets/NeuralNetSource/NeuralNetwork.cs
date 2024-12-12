@@ -480,7 +480,10 @@ Vector3 positionB = new Vector3(i * distanceX, -distanceZ, n * distanceZ - (neur
 
 
                 Vector3 positionRight = new neurodes[i][n].Delta * 3f, position.y, position.z);
-                Debug.DrawLine(position, positionUp, Color.blue);
+
+
+                Debug.DrawLine(position, positionRight, Color.white * neurodes[i][n].Delta * neurodes[i][n].Weight[k]);//!?
+
 }
 
 //Do stuff
