@@ -29,7 +29,7 @@ public class hmmmmmmm : MonoBehaviour
             }
 
             positions.Add(newPosition);
-            colors.Add(new Color((float)randomGen.NextDouble(), (float)randomGen.NextDouble(), (float)randomGen.NextDouble(),.25f));
+            colors.Add(new Color((float)randomGen.NextDouble(), (float)randomGen.NextDouble(), (float)randomGen.NextDouble(),.25f));//№###########################
             //Vector3 dir = networks[linknodes[o][0]].neurodes[linknodes[o][1]].position - networks[linknodes[o][2]].neurodes[linknodes[o][3]].position;
         }
 
@@ -66,19 +66,54 @@ public class hmmmmmmm : MonoBehaviour
         }
 
         for (int o = 1; o < positions.Count; o++)
-            Debug.DrawLine(positions[o], positions[o - 1]);
+           Debug.DrawLine(positions[o], positions[o - 1]);
+ 
 
         Color color = new Color((float)randomGen.NextDouble(), (float)randomGen.NextDouble(), (float)randomGen.NextDouble());
+
+
+
+for (int i = 0; i < positionss.Count; i++)
+//"nodes" internal links....... no need to skip  8 ...
+{
+   
+for (int o = 0; o < positionss.Count; o++)
+  if( i != o)
+  {
+
+    Debug.DrawLine(positionss[i], positionss[o], colors[i]);
+  }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         for (int i = 0; i < positionss.Count; i++)
         {
             if(i == 0 || i % 4 == 0)
                 color = new Color((float)randomGen.NextDouble(), (float)randomGen.NextDouble(), (float)randomGen.NextDouble());
 
-            for (int o = 1; o < positionss.Count - (i + 8); o++)
+            for (int o = 1; o < positionss.Count; o++)
             {
-                Debug.DrawLine(positionss[o], positionss[o + i + 8], colors[i / 4]);
+                Debug.DrawLine(positionss[o], positionss[i + 8 && positioned.Count], colors[i / 4]);// 4.
             }
         }
     }
 }
+// for each node I each non 1-8 node o != i
