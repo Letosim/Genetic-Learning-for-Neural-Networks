@@ -1,4 +1,4 @@
-﻿using System.Collections;
+ok﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,6 +33,7 @@ public class CNeurode
     public float[][] BiasVector { get { return biasVector; } set { biasVector = value; } }
 
     private List<int> neighboors;
+    private List<Cneurode> depthNeurodes;
 
     private readonly float lowerThresholdReLu = 0.5f;
     private readonly float upperThresholdReLu = 1.5f;
@@ -47,6 +48,9 @@ public class CNeurode
     /// <summary>
     /// <(O_O)>
     /// </summary>
+
+
+
     public CNeurode(int localType, System.Random randomGen, NeurodeType type, int magnitude, FanType fanType)
     {
         delta = 0;
@@ -78,8 +82,49 @@ public class CNeurode
                 }
             }
         }
-    } //Done
+    } 
     
+public CNeurode(int localType, System.Random randomGen, NeurodeType type, int magnitude, FanType fanType)
+    {
+        delta = 0;
+
+        vectorCount = GetFanInValue(magnitude, 1, fanType, randomGen);
+
+        if (localType == 0 || localType == 1 || localType == 2)
+        {
+            weight = new float[vectorCount];
+            bias = new float[vectorCount];
+        }
+
+        if (localType == 3 || localType == 4)
+        {
+            switchCount = GetSwitchCount(localType);
+
+            weightMatrix = new float[switchCount][];
+            biasVector = new float[switchCount][];
+
+            for (int i = 0; i < switchCount; i++)
+            {
+                weightMatrix[i] = new float[vectorCount];
+                biasVector[i] = new float[vectorCount];
+
+                for (int j = 0; j < vectorCount; j++)
+                {
+                    weightMatrix[i][j] = GetInitialValue(magnitude, type, randomGen);
+                    biasVector[i][j] = GetInitialValue(magnitude, type, randomGen);
+                }
+            }
+        }
+    } //Done
+
+
+public void Init(NeuralNetwork[][],int layer,int depth)
+{
+     
+
+}
+
+
     public void Reset(System.Random randomGen)
     {
         delta = 0;
