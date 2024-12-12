@@ -469,6 +469,11 @@ public void DrawConnections(Vector3 offset)
                 Vector3 positionUp = new Vector3(position.x, neurodes[i][n].Delta * 3f, position.z);
                 Debug.DrawLine(position, positionUp, Color.blue);
                 
+
+if(neurodes[i].Depth != 0)
+//Do stuff
+
+
                 if (i == 0)
                     continue;
 
