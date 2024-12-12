@@ -41,7 +41,11 @@ public class hmmmmmmm : MonoBehaviour
     List<Vector3> positionss = new List<Vector3>();
     List<Color> colors = new List<Color>();
 
-    void Update()
+  
+
+
+
+  void Update()
     {
         positionss.Clear();
 
@@ -117,3 +121,6 @@ for (int o = 0; o < positionss.Count; o++)
     }
 }
 // for each node I each non 1-8 node o != i
+
+
+//List<Neuralnetwork[][]>//
