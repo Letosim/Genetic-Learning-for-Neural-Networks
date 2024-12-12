@@ -471,6 +471,16 @@ public void DrawConnections(Vector3 offset)
                 
 
 if(neurodes[i].Depth != 0)
+{
+ 
+Vector3 position = new Vector3(i * distanceX,i * -distanceX, n * distanceZ - (neurodes[i].Length / 2 * distanceZ)) + offset;
+
+
+
+
+
+}
+
 //Do stuff
 
 
