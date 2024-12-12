@@ -465,7 +465,7 @@ public void DrawConnections(Vector3 offset)
         for (int i = 0; i < neurodes.Length; i++)
             for (int n = 0; n < neurodes[i].Length; n++)
             {
-                Vector3 position = new Vector3(i * distanceX, 0, n * distanceZ - (neurodes[i].Length / 2 * distanceZ));
+                Vector3 position = new Vector3(i * distanceX, 0, n * distanceZ - (neurodes[i].Length / 2 * distanceZ)) + offset;
                 Vector3 positionUp = new Vector3(position.x, neurodes[i][n].Delta * 3f, position.z);
                 Debug.DrawLine(position, positionUp, Color.blue);
                 
@@ -485,15 +485,15 @@ public void DrawConnections(Vector3 offset)
 
                     c /= maxValueLastDrawStage;
 
-                    Vector3 positionB = new Vector3((i - 1) * distanceX, 0, k * distanceZ - (neurodes[i - 1].Length / 2 * distanceZ));
+                    Vector3 positionB = new Vector3((i - 1) * distanceX, 0, k * distanceZ - (neurodes[i - 1].Length / 2 * distanceZ)) + offset;
                     Debug.DrawLine(position, positionB,new Color(c,c,c));
                 }
             }
 
         for (int i = 0; i < shortMemoryCount; i++)
         {
-            Vector3 position = new Vector3(0 * distanceX, 0, (shortMemoryEntraceStartIndex + i) * distanceZ - (neurodes[0].Length / 2 * distanceZ));
-            Vector3 positionB = new Vector3((neurodes.Length - 1) * distanceX, 0, (shortMemoryExitStartIndex + i) * distanceZ - (neurodes[neurodes.Length - 1].Length / 2 * distanceZ));
+            Vector3 position = new Vector3(0 * distanceX, 0, (shortMemoryEntraceStartIndex + i) * distanceZ - (neurodes[0].Length / 2 * distanceZ)) + offset;
+            Vector3 positionB = new Vector3((neurodes.Length - 1) * distanceX, 0, (shortMemoryExitStartIndex + i) * distanceZ - (neurodes[neurodes.Length - 1].Length / 2 * distanceZ)) + offset;
             Debug.DrawLine(position, positionB, Color.green);
         }
 
