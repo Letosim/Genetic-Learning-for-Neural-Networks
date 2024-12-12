@@ -123,4 +123,4 @@ for (int o = 0; o < positionss.Count; o++)
 // for each node I each non 1-8 node o != i
 
 
-//List<Neuralnetwork[][]>//
+//List<Neuralnetwork[][]>// Cneurode    private List<int> neighboors; for depth???
