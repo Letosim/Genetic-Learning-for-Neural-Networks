@@ -124,3 +124,28 @@ for (int o = 0; o < positionss.Count; o++)
 
 
 //List<Neuralnetwork[][]>// Cneurode    private List<int> neighboors; for depth???
+
+
+
+public void DrawNetwork(List<Neuralnetwork[][]> networks)
+{
+  
+for(int i = 0; i < networks.Count; i ++)
+{
+  //positions....
+
+
+}
+
+
+
+
+
+
+//neighbours??
+
+
+
+
+
+}
