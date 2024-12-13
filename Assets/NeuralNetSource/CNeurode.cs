@@ -51,7 +51,7 @@ public class CNeurode
 
 
 
-    public CNeurode(int localType, System.Random randomGen, NeurodeType type, int magnitude, FanType fanType)
+    public CNeurode(int localType, System.Random randomGen, NeurodeType type, int magnitude, FanType fanType,int depth)
     {
         delta = 0;
 
@@ -82,6 +82,10 @@ public class CNeurode
                 }
             }
         }
+
+for(int i = 0; i < depth; i++)   
+depthNeurodes.Add(new CNeurode(localType, randomGen, type, magnitude, fanType));
+
     } 
     
 public CNeurode(int localType, System.Random randomGen, NeurodeType type, int magnitude, FanType fanType)
