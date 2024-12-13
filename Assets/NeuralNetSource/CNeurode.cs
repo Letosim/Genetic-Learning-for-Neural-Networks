@@ -5,7 +5,9 @@ using UnityEngine;
 public class CNeurode
 {
     public enum FanType { Merge, Schuffle, Lerp, Alter }
+
     public enum MergeType { Merge, Schuffle, Lerp, Alter }
+
     public enum NeurodeType { ReLuNeurode, TanNeurode, SigmoidNeurode, ShortMemoryNeurode, MemoryNeurode, Seed, Feedforward, FeedforwardMemory }
 
     private NeurodeType type;
