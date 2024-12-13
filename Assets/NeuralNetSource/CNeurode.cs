@@ -122,15 +122,6 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
     } //Done
 
 
-public void Init(int depth)
-{
-  
-for(int i = 0; i < depth; i++)   
-depthNeurodes.Add(new CNeurode(localType, randomGen, type, magnitude, fanType));
-
-}
-
-
     public void Reset(System.Random randomGen)
     {
         delta = 0;
