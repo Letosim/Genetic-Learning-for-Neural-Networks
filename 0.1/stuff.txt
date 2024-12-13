@@ -1,3 +1,5 @@
+what about a raspberry pi
+
 //0	[>]   Reset value [>]
 //1	[>>]  Keep value til next activation [>>]
 //2	[...] Keep gateValue/activationValue if(GetActivationValue() == 0) [...]
