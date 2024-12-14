@@ -18,3 +18,14 @@ public class InterfaceNodeContainer : ScriptableObject
 //{
     
 //}
+
+
+public class Vector4Int()
+{
+public float X;
+public float y;
+public float z;
+
+
+
+}
