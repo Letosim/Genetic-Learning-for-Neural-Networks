@@ -1,4 +1,4 @@
-using UnityEditor;
+ifusing UnityEditor;
 using UnityEngine;
 using System;
 
@@ -22,10 +22,11 @@ public class InterfaceNodeContainer : ScriptableObject
 
 public class Vector4Int()
 {
-
+    
 public float X;
 public float y;
 public float z;
+public float w;
 
 
 public override int X { get { return X; } set { X = value; } }
@@ -34,5 +35,6 @@ public override int Y { get { return y; } set { Y = value; } }
 
 public override int Z { get { return z; } set { Z = value; } }
 
+public override int W { get { return w; } set { W = value; } }
 
 }
