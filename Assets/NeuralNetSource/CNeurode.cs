@@ -412,7 +412,8 @@ countB++;
 //         2------5        //3D max space   
 //
 //
-//
+//in Startcount 
+//or magnitude
 //
 
 
