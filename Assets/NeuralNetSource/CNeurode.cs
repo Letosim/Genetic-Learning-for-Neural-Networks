@@ -330,7 +330,6 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
 
                 delta = GetActivationValue(activationValue, type, useThershold);
 
-
 int[,] primenumberGrid;
 
 
@@ -343,27 +342,47 @@ int positionB_x = 1;
 int positionB_Y = 0;
 
 
-if(count == primenumberGrid[positionA_x,positionB_y)
+if(count == primenumberGrid[positionA_x,positionA_y)
 {
 
- if(positionA_x == 0 && positionA_y == 1)
-   positionA_x = 1;
- if(positionB_x == 0 && positionB_y == 1)
+if(positionB_x == 0 && positionB_y == 0)
    positionB_x = 1;
+
+if(positionA_x == 1 && positionA_y == 0)
+   positionA_Y = 1;
+
+ if(positionA_x == 0 && positionA_y == 1)
+   positionA_x -= 1;
+ 
+ if(positionA_x == 1 && positionA_y == 1)
+   positionA_Y = 0;
+
+// float d += primenumberGrid[positionA_x,positionA_y);
+
+ count = 0;
+}
+
+if(count == primenumberGrid[positionB_x,positionB_y)
+{
+
+if(positionB_x == 0 && positionB_y == 0)
+   positionB_y = 1;
 
 if(positionA_x == 0 && positionA_y == 1)
    positionA_x = 1;
 
+if(positionB_x == 1 && positionB_y == 1)
+   positionB_Y = 0;
 
-
+if(positionB_x == 1 && positionB_y == 0)
+   positionB_x = 0;
+ countB = 0;
 }
-
 
 
 
 count++;
 countB++;
-
 
 
 //(Run Prime/Grübel Cube till //next out)? >_> add one for each time Delta is 0//and move to the next node after hitting //the number first node 3...
