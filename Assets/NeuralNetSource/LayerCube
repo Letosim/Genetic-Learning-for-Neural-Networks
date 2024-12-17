@@ -1,17 +1,24 @@
-int[,] primenumberGrid = new int[,]{{2,5},{3,7}} ;
+using System;
 
-public int magnitude = 0;
+class LayerCube
+{
 
-public int count = 0;
-public int positionA_x = 0;
-public int positionB_y = 0;
+public static int[,] primenumberGrid = new int[,]{{2,5},{3,7}};
 
-public int countB = 0;
-public int positionB_x = 0;
-public int positionB_Y = 0;
+private int magnitude = 0;
 
-public float delta_A = 0;
-public float delta_B = 0;
+private int count = 0;
+private int positionA_x = 0;
+private int positionB_y = 0;
+
+private int countB = 0;
+private int positionB_x = 0;
+private int positionB_Y = 0;
+
+private float delta_A = 0;
+private float delta_B = 0;
+
+public Magnitude { get { return magnitude; } set { type = magnitude; } }
 
 public void Reset(int magnitudue)
 {  
@@ -24,9 +31,8 @@ positionB_Y = 0;
 delta_A = 0;
 delta_B = 0;
 
-for(int i = 0; I < magnitude; i++)
+for(int i = 0; i < magnitude; i++)
     Update();
-
 }
 
 
@@ -36,8 +42,8 @@ public void Update()
 if(count == primenumberGrid[positionA_x,positionA_y)
 {
 
-if(positionB_x == 0 && positionB_y == 0)
-   positionB_x = 1;
+if(positionA_x == 0 && positionA_y == 0)
+   positionA_x = 1;
 
 if(positionA_x == 1 && positionA_y == 0)
    positionA_Y = 1;
@@ -51,20 +57,21 @@ if(positionA_x == 1 && positionA_y == 0)
  count = 0;
 }
 
-if(count == primenumberGrid[positionB_x,positionB_y)
+if(countB == primenumberGrid[positionB_x,positionB_y)
 {
 
 if(positionB_x == 0 && positionB_y == 0)
    positionB_y = 1;
 
-if(positionA_x == 0 && positionA_y == 1)
-   positionA_x = 1;
+if(positionB_x == 0 && positionB_y == 1)
+   positionB_x = 1;
 
 if(positionB_x == 1 && positionB_y == 1)
    positionB_Y = 0;
 
 if(positionB_x == 1 && positionB_y == 0)
    positionB_x = 0;
+
  countB = 0;
 }
 
@@ -76,7 +83,7 @@ magnitude += (delta_A + delta_B);//Hmmm no big spoilers pls chatGPT
 count++;
 countB++;
 }
-
+}
 
 //
 //            
