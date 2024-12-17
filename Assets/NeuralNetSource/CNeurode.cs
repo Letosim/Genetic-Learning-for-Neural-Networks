@@ -328,7 +328,53 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
                         for (int v = 0; v < vectorCount; v++)
                             activationValue += network[i][n].Delta * weightMatrix[1][v] + biasVector[1][v];
 
-                delta = GetActivationValue(activationValue, type,;useThershold);//(Run Prime/Grübel Cube till //next out)? >_> add one for each time Delta is 0//and move to the next node after hitting //the number first node 3...
+                delta = GetActivationValue(activationValue, type, useThershold);
+
+
+int[,] primenumberGrid;
+
+
+int count = 0;
+int positionA_x = 0;//biger value
+int positionB_y = 1;//biger value
+
+int countB = 0;
+int positionB_x = 1;
+int positionB_Y = 0;
+
+
+if(count == primenumberGrid[positionA_x,positionB_y)
+{
+
+ if(positionA_x == 0 && positionA_y == 1)
+   positionA_x = 1;
+ if(positionB_x == 0 && positionB_y == 1)
+   positionB_x = 1;
+
+if(positionA_x == 0 && positionA_y == 1)
+   positionA_x = 1;
+
+
+
+}
+
+
+
+
+count++;
+countB++;
+
+
+
+//(Run Prime/Grübel Cube till //next out)? >_> add one for each time Delta is 0//and move to the next node after hitting //the number first node 3...
+
+//        3-----21
+//        |      |
+//in = 47-| time |-?[...]?- out = ?
+//        |      |
+//        7-----11
+
+
             }
         }
     }//Done
