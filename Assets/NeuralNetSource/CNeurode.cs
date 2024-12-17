@@ -51,9 +51,6 @@ public class CNeurode
     /// <summary>
     /// <(O_O)>
     /// </summary>
-
-
-
     public CNeurode(int localType, System.Random randomGen, NeurodeType type, int magnitude, FanType fanType,int depth)
     {
         delta = 0;
