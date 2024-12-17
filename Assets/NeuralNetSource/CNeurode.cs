@@ -335,100 +335,29 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
         }
 
 
-//       if (localType == 4)//                                                                                        [>>  ||  |>]
-//        {
+       if (localType == 4)                                                                                      [>>  ||  |>]
+        {
+float activationValue = 0;
 
-//int[,] primenumberGrid;//50
-//int count = 0;
-//int positionA_x = 0;
-//int positionB_y = 0;
+            for (int i = 0; i < network.GetLength(0); i++)
+                for (int n = 0; n < network.GetLength(1); n++)
+                    for (int v = 0; v < vectorCount; v++)
+                        activationValue += network[i][n].Delta * weightMatrix[0][v] + biasVector[0][v];
 
-//int countB = 0;
-//int positionB_x = 0;
-//int positionB_Y = 0;
+            delta = GetActivationValue(activationValue, type, useThershold);
 
-//float delta_A = 0;
-//float delta_B = 0;
+            if (delta != 0)
+            {
+                if(cube.Isrunning)
+                  delta = GetActivationValue(cube.magnitude, type, useThershold);
+else
+   cube.Reset(float delta);
+            }
 
-//if(count //primenumberGrid[positionA_x,positionA_y])
-//{
+ if(cube.Isrunning)
+    cube.update();
 
-//delta_A //primenumberGrid[positionA_x,positionA_y];
-
-if(positionB_x == 0 && positionB_y == 0)
-//   positionB_x = 1;
-
-//if(positionA_x == 1 && positionA_y == 0)   //positionA_Y = 1;
-
-// if(positionA_x == 0 && positionA_y == 1)   //positionA_x -= 1;
- 
-// if(positionA_x == 1 && positionA_y == 1)   //positionA_Y = 0;
-
-// count = 0;
-//}
-
-//if(count == //primenumberGrid[positionB_x,positionB_y)
-{
-
-//delta_B += //primenumberGrid[positionA_x,positionA_y];
-
-//if(positionB_x == 0 && positionB_y == 0)   //positionB_y = 1;
-
-//if(positionA_x == 0 && positionA_y == 1)
-//   positionA_x = 1;
-
-//if(positionB_x == 1 && positionB_y == 1)   //positionB_Y = 0;
-
-//if(positionB_x == 1 && positionB_y == 0)
-//   positionB_x = 0;
-
-// countB = 0;
-//}
-
-
-//if((positionA_x == positionB_x) && (positionA_y == positionB_y))
-//float tmp = (delta_A + delta_B);
-
-
-
-
-//count++;
-//countB++;
-
-
-
-//(Run Prime/Grübel Cube till //next out)? >_> add one for each time Delta is 0//and move to the next node after hitting //the number first node 3...
-
-
-
-//
-//
-//
-//
-//            
-//           11-----13
-//           /      /|   
-//          3------7 |- out = ?
-//          |      | |
-// in = 47 -| time | 21       
-//          |      |/ 
-//          2------5        //3D max space   
-//
-//
-// in Startcount 
-// or magnitude
-//
-//
-
-
-
-
-
-//Getactivationvalue(primenumberGrid[positionA_x,//positionA_y])bigger cube?
-
-
-
-//            }
+        }
         
     }//Done
 
