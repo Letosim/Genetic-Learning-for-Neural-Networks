@@ -359,7 +359,7 @@ if(positionA_x == 1 && positionA_y == 0)
  if(positionA_x == 0 && positionA_y == 1)
    positionA_x -= 1;
  
- if(positionA_x == 1 && positionA_y == 1)
+ if(positionA_x == 1 && positionA_y == 1))// if !con return 0
    positionA_Y = 0;
 
  count = 0;
@@ -376,7 +376,7 @@ if(positionB_x == 0 && positionB_y == 0)
 if(positionA_x == 0 && positionA_y == 1)
    positionA_x = 1;
 
-if(positionB_x == 1 && positionB_y == 1)
+if(positionB_x == 1 && positionB_y == 1)// if !con return 0
    positionB_Y = 0;
 
 if(positionB_x == 1 && positionB_y == 0)
@@ -388,6 +388,9 @@ if(positionB_x == 1 && positionB_y == 0)
 
 if((positionA_x == positionB_x) && (positionA_y == positionB_y)
 float tmp = (delta_A + delta_B);
+
+
+
 
 count++;
 countB++;
