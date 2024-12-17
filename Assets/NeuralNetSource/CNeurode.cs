@@ -419,7 +419,6 @@ countB++;
 
 
 
-
 Getactivationvalue(primenumberGrid[positionA_x,//positionA_y])bigger cube?
 
 
