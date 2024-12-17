@@ -386,7 +386,7 @@ if(positionB_x == 1 && positionB_y == 0)
 }
 
 
-if((positionA_x == positionB_x) && (positionA_y == positionB_y)
+if((positionA_x == positionB_x) && (positionA_y == positionB_y))
 float tmp = (delta_A + delta_B);
 
 
