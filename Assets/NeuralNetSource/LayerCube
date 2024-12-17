@@ -1,18 +1,17 @@
 int[,] primenumberGrid = new int[,]{{2,5},{3,7}} ;
 
-int magnitude = 0;
+public int magnitude = 0;
 
-int count = 0;
-int positionA_x = 0;
-int positionB_y = 0;
+public int count = 0;
+public int positionA_x = 0;
+public int positionB_y = 0;
 
-int countB = 0;
-int positionB_x = 0;
-int positionB_Y = 0;
+public int countB = 0;
+public int positionB_x = 0;
+public int positionB_Y = 0;
 
-float delta_A = 0;
-float delta_B = 0;
-
+public float delta_A = 0;
+public float delta_B = 0;
 
 public void Reset(int magnitudue)
 {  
