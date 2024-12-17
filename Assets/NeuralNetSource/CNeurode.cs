@@ -1,4 +1,4 @@
-ok﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -328,7 +328,7 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
                         for (int v = 0; v < vectorCount; v++)
                             activationValue += network[i][n].Delta * weightMatrix[1][v] + biasVector[1][v];
 
-                delta = GetActivationValue(activationValue, type, useThershold);//(run primebGrübel-Cube cube)? >_> till next out
+                delta = GetActivationValue(activationValue, type, useThershold);//(Run Prime/Grübel Cube till next out)? >_> 
             }
         }
     }//Done
