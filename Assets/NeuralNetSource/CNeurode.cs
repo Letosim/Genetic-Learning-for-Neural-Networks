@@ -328,7 +328,7 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
                         for (int v = 0; v < vectorCount; v++)
                             activationValue += network[i][n].Delta * weightMatrix[1][v] + biasVector[1][v];
 
-                delta = GetActivationValue(activationValue, type, useThershold);//(Run Prime/Grübel Cube till next out)? >_> 
+                delta = GetActivationValue(activationValue, type, useThershold);//(Run Prime/Grübel Cube till next out)? >_> add one for each time Delta is 0 and move to the next node after hitting the number first node 3...
             }
         }
     }//Done
