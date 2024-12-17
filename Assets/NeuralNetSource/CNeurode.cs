@@ -397,16 +397,18 @@ countB++;
 
 //(Run Prime/Grübel Cube till //next out)? >_> add one for each time Delta is 0//and move to the next node after hitting //the number first node 3...
 
-            
-            11-----13
-            /      /|   
+
+//
+//            
+//          11-----13
+//          /      /|   
 //         3------7 |- out = ?
 //         |      | |
-//  in = 47-| time | 21       
+// in = 47-| time | 21       
 //         |      |/ 
 //         2------5        //3D max space   
-
-
+//
+//
 
 
 //muss man nicht mehr sichten es seiden es weicht zu sehr ab??????????//Getactivationvalue(primenumberGrid[positionA_x,//positionA_y])bigger cube?
