@@ -330,20 +330,25 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
 
                 delta = GetActivationValue(activationValue, type, useThershold);
 
-int[,] primenumberGrid;
+int[,] primenumberGrid;//50
 
 
 int count = 0;
-int positionA_x = 0;//biger value
-int positionB_y = 1;//biger value
+int positionA_x = 0;
+int positionB_y = 1;
 
 int countB = 0;
 int positionB_x = 1;
 int positionB_Y = 0;
 
+float delta_A = 0;
+float delta_B = 0;
 
-if(count == primenumberGrid[positionA_x,positionA_y)
+
+if(count == primenumberGrid[positionA_x,positionA_y])
 {
+
+delta_A += primenumberGrid[positionA_x,positionA_y];
 
 if(positionB_x == 0 && positionB_y == 0)
    positionB_x = 1;
@@ -357,13 +362,13 @@ if(positionA_x == 1 && positionA_y == 0)
  if(positionA_x == 1 && positionA_y == 1)
    positionA_Y = 0;
 
-// float d += primenumberGrid[positionA_x,positionA_y);
-
  count = 0;
 }
 
 if(count == primenumberGrid[positionB_x,positionB_y)
 {
+
+delta_B += primenumberGrid[positionA_x,positionA_y];
 
 if(positionB_x == 0 && positionB_y == 0)
    positionB_y = 1;
@@ -376,10 +381,13 @@ if(positionB_x == 1 && positionB_y == 1)
 
 if(positionB_x == 1 && positionB_y == 0)
    positionB_x = 0;
+
  countB = 0;
 }
 
 
+if((positionA_x == positionB_x) && (positionA_y == positionB_y)
+float tmp = (delta_A + delta_B);
 
 count++;
 countB++;
