@@ -5,6 +5,28 @@ Some sort of Dota 2 Creep      Rays for recongnition of visible polygons(objects
 GL & HF "I am ot sure if its over complex but i think that there is great abstraction potential for memory computation and feed forward Neural netowrks (or even graphs of networks) or gaming... :P"
 
 
+
+
+//??????????????????????????????
+Also a neurode based on a float array [,,]
+game of life and prime numbers!?!?!?!?
+
+
+       719----721
+        |      |
+in = 47-| time |-?[...]?- out = ?
+        |      | 
+       709----701
+
+
+for example in = Activationsvalue * 100;
+
+divide till close to zero!?
+
+
+
+
+
 //   k = networklayers       all   ||   backwards  ||    forwards    ||   booth  || (??  >   logic <3) "don't get greedy"
 //   activationValue += parentLayer[n].Delta * nestedWeightsArray[n][k][o][i] + nestedBiasesArray[n][k][o][i]; forward                     
 
