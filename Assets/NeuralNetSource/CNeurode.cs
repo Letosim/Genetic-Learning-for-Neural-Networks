@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -330,102 +331,109 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
 
                 delta = GetActivationValue(activationValue, type, useThershold);
 
-int[,] primenumberGrid;//50
+            }
+        }
 
 
-int count = 0;
-int positionA_x = 0;
-int positionB_y = 1;
+//       if (localType == 4)//                                                                                        [>>  ||  |>]
+//        {
 
-int countB = 0;
-int positionB_x = 1;
-int positionB_Y = 0;
+//int[,] primenumberGrid;//50
+//int count = 0;
+//int positionA_x = 0;
+//int positionB_y = 0;
 
-float delta_A = 0;
-float delta_B = 0;
+//int countB = 0;
+//int positionB_x = 0;
+//int positionB_Y = 0;
 
+//float delta_A = 0;
+//float delta_B = 0;
 
-if(count == primenumberGrid[positionA_x,positionA_y])
-{
+//if(count //primenumberGrid[positionA_x,positionA_y])
+//{
 
-delta_A += primenumberGrid[positionA_x,positionA_y];
+//delta_A //primenumberGrid[positionA_x,positionA_y];
 
 if(positionB_x == 0 && positionB_y == 0)
-   positionB_x = 1;
+//   positionB_x = 1;
 
-if(positionA_x == 1 && positionA_y == 0)
-   positionA_Y = 1;
+//if(positionA_x == 1 && positionA_y == 0)   //positionA_Y = 1;
 
- if(positionA_x == 0 && positionA_y == 1)
-   positionA_x -= 1;
+// if(positionA_x == 0 && positionA_y == 1)   //positionA_x -= 1;
  
- if(positionA_x == 1 && positionA_y == 1))
-   positionA_Y = 0;
+// if(positionA_x == 1 && positionA_y == 1)   //positionA_Y = 0;
 
- count = 0;
-}
+// count = 0;
+//}
 
-if(count == primenumberGrid[positionB_x,positionB_y)
+//if(count == //primenumberGrid[positionB_x,positionB_y)
 {
 
-delta_B += primenumberGrid[positionA_x,positionA_y];
+//delta_B += //primenumberGrid[positionA_x,positionA_y];
 
-if(positionB_x == 0 && positionB_y == 0)
-   positionB_y = 1;
+//if(positionB_x == 0 && positionB_y == 0)   //positionB_y = 1;
 
-if(positionA_x == 0 && positionA_y == 1)
-   positionA_x = 1;
+//if(positionA_x == 0 && positionA_y == 1)
+//   positionA_x = 1;
 
-if(positionB_x == 1 && positionB_y == 1)
-   positionB_Y = 0;
+//if(positionB_x == 1 && positionB_y == 1)   //positionB_Y = 0;
 
-if(positionB_x == 1 && positionB_y == 0)
-   positionB_x = 0;
+//if(positionB_x == 1 && positionB_y == 0)
+//   positionB_x = 0;
 
- countB = 0;
-}
+// countB = 0;
+//}
 
 
-if((positionA_x == positionB_x) && (positionA_y == positionB_y))
-float tmp = (delta_A + delta_B); 3 24
+//if((positionA_x == positionB_x) && (positionA_y == positionB_y))
+//float tmp = (delta_A + delta_B);
 
 
 
 
-count++;
-countB++;
+//count++;
+//countB++;
+
+
 
 //(Run Prime/Grübel Cube till //next out)? >_> add one for each time Delta is 0//and move to the next node after hitting //the number first node 3...
 
 
 
-
+//
 //
 //
 //
 //            
-//          11-----13
-//          /      /|   
-//         3------7 |- out = ?
-//         |      | |
-// in = 47-| time | 21       
-//         |      |/ 
-//         2------5        //3D max space   
+//           11-----13
+//           /      /|   
+//          3------7 |- out = ?
+//          |      | |
+// in = 47 -| time | 21       
+//          |      |/ 
+//          2------5        //3D max space   
 //
 //
-//in Startcount 
-//or magnitude
+// in Startcount 
+// or magnitude
+//
 //
 
 
 
-Getactivationvalue(primenumberGrid[positionA_x,//positionA_y])bigger cube?
+
+
+//Getactivationvalue(primenumberGrid[positionA_x,//positionA_y])bigger cube?
 
 
 
-            }
-        }
+//            }
+        
     }//Done
+
+
+
 
     public void RunForward(CNeurode[] neurodes, bool useThershold)
     {
