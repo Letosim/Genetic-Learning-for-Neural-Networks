@@ -85,5 +85,5 @@ divide till close to zero!?
 
 
 
-// weight bias magnitude for the cube:P
+// weight bias, magnitude for the cube:P
 so assuming some sort of the resistance to overcome the prime values there could be some I initial start value need to consider the I itialion of the cube with smaller or larger numbers +-0;
