@@ -359,7 +359,7 @@ if(positionA_x == 1 && positionA_y == 0)
  if(positionA_x == 0 && positionA_y == 1)
    positionA_x -= 1;
  
- if(positionA_x == 1 && positionA_y == 1))// if !con return 0
+ if(positionA_x == 1 && positionA_y == 1))
    positionA_Y = 0;
 
  count = 0;
@@ -376,7 +376,7 @@ if(positionB_x == 0 && positionB_y == 0)
 if(positionA_x == 0 && positionA_y == 1)
    positionA_x = 1;
 
-if(positionB_x == 1 && positionB_y == 1)// if !con return 0
+if(positionB_x == 1 && positionB_y == 1)
    positionB_Y = 0;
 
 if(positionB_x == 1 && positionB_y == 0)
@@ -387,7 +387,7 @@ if(positionB_x == 1 && positionB_y == 0)
 
 
 if((positionA_x == positionB_x) && (positionA_y == positionB_y))
-float tmp = (delta_A + delta_B);
+float tmp = (delta_A + delta_B); 3 24
 
 
 
@@ -397,12 +397,16 @@ countB++;
 
 
 //(Run Prime/Grübel Cube till //next out)? >_> add one for each time Delta is 0//and move to the next node after hitting //the number first node 3...
-
-//        3-----21
+                
+//        3------7 //lesgo
 //        |      |
 //in = 47-| time |-?[...]?- out = ?
 //        |      |
-//        7-----11
+//        2------5.   
+
+
+//Getactivationvalue(primenumberGrid[positionA_x,//positionA_y])bigger cube?
+
 
 
             }
