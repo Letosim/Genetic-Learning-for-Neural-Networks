@@ -399,6 +399,7 @@ countB++;
 
 
 
+
 //
 //
 //
@@ -415,6 +416,8 @@ countB++;
 //in Startcount 
 //or magnitude
 //
+
+
 
 
 Getactivationvalue(primenumberGrid[positionA_x,//positionA_y])bigger cube?
