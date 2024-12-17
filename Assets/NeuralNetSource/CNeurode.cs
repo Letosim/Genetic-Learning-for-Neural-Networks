@@ -334,7 +334,6 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
             }
         }
 
-
        if (localType == 4)                                                                                      [>>  ||  |>]
         {
 float activationValue = 0;
@@ -351,18 +350,14 @@ float activationValue = 0;
                 if(cube.Isrunning)
                   delta = GetActivationValue(cube.magnitude, type, useThershold);
 else
-   cube.Reset(float delta);
+   cube.Reset(delta);
             }
 
  if(cube.Isrunning)
     cube.update();
 
-        }
-        
+        }       
     }//Done
-
-
-
 
     public void RunForward(CNeurode[] neurodes, bool useThershold)
     {
