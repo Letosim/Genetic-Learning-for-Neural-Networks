@@ -321,6 +321,9 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
 
             if (delta != 0)
             {
+
+activationValue = 0;
+
                 for (int i = 0; i < network.GetLength(0); i++)
                     for (int n = 0; n < network.GetLength(1); n++)
                         for (int v = 0; v < vectorCount; v++)
