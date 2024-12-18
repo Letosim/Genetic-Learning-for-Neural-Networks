@@ -15,10 +15,11 @@ private int countB = 0;
 private int positionB_x = 0;
 private int positionB_Y = 0;
 
-private float delta_A = 0;
-private float delta_B = 0;
+//private float delta_A = 0;?
+//private float delta_B = 0;?
 
 public Magnitude { get { return magnitude; } set { type = magnitude; } }
+
 
 public void Reset(int magnitudue)
 {  
@@ -38,7 +39,99 @@ for(int i = 0; i < magnitude; i++)
 
 public void Update()
 {
+UpdatePosition(positionA_x, positionA_y,stateA);
 
+UpdatePosition(positionB_x, positionB_y,stateA);
+
+count++;
+countB++;
+}
+
+public void UpdatePosition(int ref x,int ref y, bool ref state)
+{
+
+if(state)
+if(countB == primenumberGrid[positionB_x,positionB_y)
+{
+
+if(x == 0 && y == 0)
+   y = 1;
+
+if(x == 0 && y == 1)
+   x = 1;
+
+if(x == 1 && y == 1)
+   y = 0;
+
+if(x == 1 && y == 0)
+   x = 0;
+
+ countB = 0;
+}
+else
+if(count == primenumberGrid[positionA_x,positionA_y)
+{
+
+if(x == 0 && y == 0)
+   x = 1;
+
+if(x == 1 && y == 0)
+   y = 1;
+
+ if(x == 0 && y == 1)
+   x = 0;
+ 
+ if(x == 1 && y == 1)
+   y = 0;
+
+ count = 0;
+}
+
+if((positionA_x == positionB_x) && (positionA_y == positionB_y))
+{
+
+if(stateA == true)
+stateA = false;
+else
+stateA = true;
+
+if(stateB == true)
+stateB = false;
+else
+stateB = true;
+
+int rest = (count + countB) / 2;
+
+count = rest;
+countB = rest; 
+
+}
+
+}
+
+public void UpdatePosition(int ref x,int ref y)
+{
+
+
+if(left)
+if(countB == primenumberGrid[positionB_x,positionB_y)
+{
+
+if(positionB_x == 0 && positionB_y == 0)
+   positionB_y = 1;
+
+if(positionB_x == 0 && positionB_y == 1)
+   positionB_x = 1;
+
+if(positionB_x == 1 && positionB_y == 1)
+   positionB_Y = 0;
+
+if(positionB_x == 1 && positionB_y == 0)
+   positionB_x = 0;
+
+ countB = 0;
+}
+else
 if(count == primenumberGrid[positionA_x,positionA_y)
 {
 
@@ -57,33 +150,11 @@ if(positionA_x == 1 && positionA_y == 0)
  count = 0;
 }
 
-if(countB == primenumberGrid[positionB_x,positionB_y)
-{
 
-if(positionB_x == 0 && positionB_y == 0)
-   positionB_y = 1;
 
-if(positionB_x == 0 && positionB_y == 1)
-   positionB_x = 1;
-
-if(positionB_x == 1 && positionB_y == 1)
-   positionB_Y = 0;
-
-if(positionB_x == 1 && positionB_y == 0)
-   positionB_x = 0;
-
- countB = 0;
 }
 
 
-if((positionA_x == positionB_x) && (positionA_y == positionB_y))
-magnitude += (delta_A + delta_B);//Hmmm no big spoilers pls chatGPT
-
-
-count++;
-countB++;
-}
-}
 
 //
 //            
@@ -96,3 +167,9 @@ countB++;
 //          2------5        //3D max space   
 //
 //
+
+
+
+
+if((positionA_x == positionB_x) && (positionA_y == positionB_y))
+magnitude += (delta_A + delta_B);//Hmmm no big spoilers pls chatGPT
