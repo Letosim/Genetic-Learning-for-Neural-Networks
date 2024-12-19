@@ -18,8 +18,8 @@ public class CNeurode
     private int switchCount = 0;
 
     private bool isMemoryNeurode;
-    private bool wasActive;
-    public float WasActive { get { return wasActive; } set { wasActive = value; } }
+    private bool[] wasActive;
+    public bool[] WasActive { get { return wasActive; } set { wasActive = value; } }
 
 
     public NeurodeType Type { get { return type; } set { type = value; } }
@@ -51,6 +51,47 @@ public class CNeurode
     private readonly float upperThresholdTanh = 0.5f;
 
     private LayerCube cube { get; set; }  = null;
+
+
+    /// <summary>
+    /// <(O_O)>
+    /// </summary>
+    public CNeurode(int localType, System.Random randomGen, NeurodeType type, int magnitude, FanType fanType)
+    {
+        delta = 0;
+
+        vectorCount = GetFanInValue(magnitude, 1, fanType, randomGen);
+
+        if (localType == 0 || localType == 1 || localType == 2)
+        {
+            weight = new float[vectorCount];
+            bias = new float[vectorCount];
+        }
+
+        if (localType == 3 || localType == 4)
+        {
+            switchCount = GetSwitchCount(localType);
+
+            if (switchCount == 2)
+                wasActive = new bool[switchCount];
+
+            weightMatrix = new float[switchCount][];
+            biasVector = new float[switchCount][];
+
+            for (int i = 0; i < switchCount; i++)
+            {
+                weightMatrix[i] = new float[vectorCount];
+                biasVector[i] = new float[vectorCount];
+
+                for (int j = 0; j < vectorCount; j++)
+                {
+                    weightMatrix[i][j] = GetInitialValue(magnitude, type, randomGen);
+                    biasVector[i][j] = GetInitialValue(magnitude, type, randomGen);
+                }
+            }
+        }
+    } //Done
+
 
     public void Reset(System.Random randomGen)
     {
@@ -284,16 +325,17 @@ public class CNeurode
 
     public void RunForward(CNeurode[][] network, bool useThershold, NeurodeType type)
     {
-        if (localType == 0)
+        if (localType == 5)
         {
-            if (isMemoryNeurode)
+            if (isMemoryNeurode)//outputlayer out > in
             {
                 float activationValue = 0;
+                wasActive = false;
 
                 for (int i = 0; i < network.GetLength(0); i++)
                     for (int n = 0; n < network.GetLength(1); n++)
-                        for (int v = 0; v < vectorCount; v++)
-                            activationValue += network[i][n].delta * weight[v] + bias[v];
+                        if (network[i][n].WasActive[0])
+                            activationValue += 1;
 
                 activationValue = GetActivationValue(activationValue, type, useThershold);
 
@@ -306,8 +348,8 @@ public class CNeurode
 
                 for (int i = 0; i < network.GetLength(0); i++)
                     for (int n = 0; n < network.GetLength(1); n++)
-                        for (int v = 0; v < vectorCount; v++)
-                            activationValue += network[i][n].delta * weight[v] + bias[v];
+                        if (network[i][n].WasActive[0])
+                            activationValue += 1;
 
                 delta = GetActivationValue(activationValue, type, useThershold);
             }
@@ -316,11 +358,12 @@ public class CNeurode
         if (localType == 1)//                                                                                        [>|]
         {
             float activationValue = 0;
+            wasActive = false;
 
             for (int i = 0; i < network.GetLength(0); i++)
                 for (int n = 0; n < network.GetLength(1); n++)
-                    for (int v = 0; v < vectorCount; v++)
-                        activationValue += network[i][n].delta * weight[v] + bias[v];
+                        if (network[i][n].WasActive[0])
+                            activationValue += 1;
 
             delta = GetActivationValue(activationValue, type, useThershold);
         }
@@ -328,18 +371,19 @@ public class CNeurode
         if (localType == 2)//                                                                                        [..]
         {
             float activationValue = 0;
+            wasActive = false;
 
             for (int i = 0; i < network.GetLength(0); i++)
                 for (int n = 0; n < network.GetLength(1); n++)
-                    for (int v = 0; v < vectorCount; v++)
-                        activationValue += network[i][n].Delta * weightMatrix[0][v] + biasVector[0][v];
-
+                    if (network[i][n].WasActive[0])
+                        activationValue += 1;
+            
             if (GetActivationValue(activationValue, type, useThershold) != 0)
             {
                 for (int i = 0; i < network.GetLength(0); i++)
                     for (int n = 0; n < network.GetLength(1); n++)
-                        for (int v = 0; v < vectorCount; v++)
-                            activationValue += network[i][n].Delta * weightMatrix[1][v] + biasVector[1][v];
+                        if (network[i][n].WasActive[1])
+                            activationValue += 1;
 
                 delta = GetActivationValue(activationValue, type, useThershold);
             }
@@ -352,9 +396,8 @@ public class CNeurode
 
             for (int i = 0; i < network.GetLength(0); i++)
                 for (int n = 0; n < network.GetLength(1); n++)
-                    for (int v = 0; v < vectorCount; v++)
-                        if (network[i][n].WasActive)
-                            activationValue += 1;
+                    if (network[i][n].WasActive[0])
+                        activationValue += 1;
 
             delta = GetActivationValue(activationValue, type, useThershold);
 
@@ -365,15 +408,14 @@ public class CNeurode
 
                 for (int i = 0; i < network.GetLength(0); i++)
                     for (int n = 0; n < network.GetLength(1); n++)
-                        for (int v = 0; v < vectorCount; v++)
-                            if (network[i][n].WasActive)
-                                activationValue += 1;
+                        if (network[i][n].WasActive[1])
+                            activationValue += 1;
 
                 delta = GetActivationValue(activationValue, type, useThershold);
 
             }
         }
-
+        
         if (localType == 4)//                                                                                         [>>  ||  |>]
         {
             float activationValue = 0;
@@ -381,8 +423,7 @@ public class CNeurode
 
             for (int i = 0; i < network.GetLength(0); i++)
                 for (int n = 0; n < network.GetLength(1); n++)
-                    for (int v = 0; v < vectorCount; v++)
-                        if(GetActivationValue(network[i][n].Delta * weightMatrix[0][v] + biasVector[0][v]))
+                        if (network[i][n].WasActive[0])
                             activationValue += 1;
 
             delta = GetActivationValue(activationValue, type, useThershold);
