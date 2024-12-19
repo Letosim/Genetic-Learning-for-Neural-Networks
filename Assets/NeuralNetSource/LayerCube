@@ -3,11 +3,12 @@ using System;
 public class LayerCube
 {
     public static readonly int[,] primenumberGrid = new int[,] { { 2, 5 }, { 3, 7 } };
-    public float Vector { get { return (float)vector / divident; } set { return; } }//Out for the activation value of a NeuralNetwork
-    public bool IsRunning { get; set; } 
+    public bool Vector { get { return vector; } set { vector = value; } }//Out for the activation value of a NeuralNetwork
+    public bool IsRunning { get; set; }
+    
 
 
-    private float divident = 4f;
+    private float divident = 2f;
 
     private int vector = 0;
 
@@ -42,7 +43,7 @@ public class LayerCube
 
         if ((positionA_x == positionB_x) && (positionA_y == positionB_y))
         {
-            vector = (count + countB) / 2;
+            vector = (count + countB) / divident;
 
             count = vector;
             countB = vector;
