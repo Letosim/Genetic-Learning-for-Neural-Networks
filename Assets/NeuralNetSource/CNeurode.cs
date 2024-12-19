@@ -29,7 +29,7 @@ public class CNeurode
     public float[] bias;
     public float[] Bias { get { return bias; } set { bias = value; } }
     public float[] Weight { get { return weight; } set { weight = value; } }
- 
+
     public float[][] weightMatrix;
     public float[][] biasVector;
     public float[][] WeightMatrix { get { return weightMatrix; } set { weightMatrix = value; } }
@@ -51,7 +51,7 @@ public class CNeurode
     /// <summary>
     /// <(O_O)>
     /// </summary>
-    public CNeurode(int localType, System.Random randomGen, NeurodeType type, int magnitude, FanType fanType,int depth)
+    public CNeurode(int localType, System.Random randomGen, NeurodeType type, int magnitude, FanType fanType, int depth)
     {
         delta = 0;
 
@@ -83,12 +83,12 @@ public class CNeurode
             }
         }
 
-for(int i = 0; i < depth; i++)   
-depthNeurodes.Add(new CNeurode(localType, randomGen, type, magnitude, fanType));
+        for (int i = 0; i < depth; i++)
+            depthNeurodes.Add(new CNeurode(localType, randomGen, type, magnitude, fanType));
 
-    } 
-    
-public CNeurode(int localType, System.Random randomGen, NeurodeType type, int magnitude, FanType fanType)
+    }
+
+    public CNeurode(int localType, System.Random randomGen, NeurodeType type, int magnitude, FanType fanType)
     {
         delta = 0;
 
@@ -126,10 +126,10 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
     {
         delta = 0;
 
-        if (localType == 0 || localType == 1 || localType == 2) 
+        if (localType == 0 || localType == 1 || localType == 2)
             for (int v = 0; v < vectorCount; v++)
             {
-                bias[v] = GetInitialValue(1,type, randomGen);
+                bias[v] = GetInitialValue(1, type, randomGen);
                 weight[v] = GetInitialValue(1, type, randomGen);
             }
 
@@ -146,14 +146,13 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
         }
     } //Done!
 
-
     /// <summary>
     /// magnitude = layer size,  neighboor count,    magic number
     /// </summary>
-    public int GetFanInValue(int magnitude, int multiplyer,FanType type, System.Random randomGen) //  int multiplyer = 1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public int GetFanInValue(int magnitude, int multiplyer, FanType type, System.Random randomGen) //  int multiplyer = 1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
         return (int)System.Math.Sqrt(2 / magnitude) * multiplyer;
-    } 
+    }
 
     public float GetInitialValue(int magnitude, NeurodeType type, System.Random randomGen)//layer????
     {
@@ -171,7 +170,6 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
 
         return -1f;
     }
-
 
     public float GetActivationValue(float activationValue, NeurodeType type, bool useThresholdForActivation)
     {
@@ -242,8 +240,6 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
 
         return -1;
     }
-
-
 
     public void RunForward(CNeurode[][] network, bool useThershold, NeurodeType type)
     {
@@ -322,7 +318,7 @@ public CNeurode(int localType, System.Random randomGen, NeurodeType type, int ma
             if (delta != 0)
             {
 
-activationValue = 0;
+                activationValue = 0;
 
                 for (int i = 0; i < network.GetLength(0); i++)
                     for (int n = 0; n < network.GetLength(1); n++)
@@ -334,9 +330,9 @@ activationValue = 0;
             }
         }
 
-       if (localType == 4)                                                                                      [>>  ||  |>]
+        if (localType == 4)//                                                                                         [>>  ||  |>]
         {
-float activationValue = 0;
+            float activationValue = 0;
 
             for (int i = 0; i < network.GetLength(0); i++)
                 for (int n = 0; n < network.GetLength(1); n++)
@@ -347,16 +343,16 @@ float activationValue = 0;
 
             if (delta != 0)
             {
-                if(cube.Isrunning)
-                  delta = GetActivationValue(cube.magnitude, type, useThershold);
-else
-   cube.Reset(delta);
+                if (cube.Isrunning)
+                    delta = GetActivationValue(cube.magnitude, type, useThershold);
+                else
+                    cube.Reset(delta);
             }
 
- if(cube.Isrunning)
-    cube.update();
+            if (cube.Isrunning)
+                cube.update();
 
-        }       
+        }
     }//Done
 
     public void RunForward(CNeurode[] neurodes, bool useThershold)
@@ -417,7 +413,7 @@ else
             }
         }
 
-        if (localType == 3)//                                                                                        [>>]
+        if (localType == 3)//                                                                                        [>>  ||  |>]
         {
             float activationValue = 0;
 
@@ -436,6 +432,30 @@ else
                 delta = GetActivationValue(activationValue, type, useThershold);
             }
         }
+
+        if (localType == 4)//                                                                                        [>>  ||  |>]
+        {
+            float activationValue = 0;
+
+            for (int i = 0; i < network.GetLength(0); i++)
+                for (int n = 0; n < network.GetLength(1); n++)
+                    for (int v = 0; v < vectorCount; v++)
+                        activationValue += network[n].Delta * weightMatrix[0][v] + biasVector[0][v];
+
+            delta = GetActivationValue(activationValue, type, useThershold);
+
+            if (delta != 0)
+            {
+                if (cube.Isrunning)
+                    delta = GetActivationValue(cube.Vector, type, useThershold);
+                else
+                    cube.Reset(delta);
+            }
+
+            if (cube.Isrunning)
+                cube.Update();
+        }
+
     } //Done
 
     public void RunForward(List<CNeurode> neurodes, bool useThershold)
@@ -456,15 +476,15 @@ else
                     delta = activationValue;
             }
             else
-                {
-                    float activationValue = 0;
+            {
+                float activationValue = 0;
 
-                    for (int n = 0; n < neurodes.Count; n++)
-                        for (int v = 0; v < vectorCount; v++)
-                            activationValue += neurodes[n].Delta * weight[v] + bias[v];
+                for (int n = 0; n < neurodes.Count; n++)
+                    for (int v = 0; v < vectorCount; v++)
+                        activationValue += neurodes[n].Delta * weight[v] + bias[v];
 
-                    delta = GetActivationValue(activationValue, type, useThershold);
-                }
+                delta = GetActivationValue(activationValue, type, useThershold);
+            }
         }
 
         if (localType == 1)//                                                                                        [>|]
@@ -496,7 +516,7 @@ else
             }
         }
 
-        if (localType == 3)//                                                                                        [>>]
+        if (localType == 3)////                                                                                        [>>  ||  |>]
         {
             float activationValue = 0;
 
@@ -506,7 +526,7 @@ else
 
             delta = GetActivationValue(activationValue, type, useThershold);
 
-            if (delta != 0) 
+            if (delta != 0)
             {
                 for (int n = 0; n < neurodes.Count; n++)
                     for (int v = 0; v < vectorCount; v++)
@@ -515,9 +535,29 @@ else
                 delta = GetActivationValue(activationValue, type, useThershold);
             }
         }
+
+        if (localType == 4)//                                                                                        [>>  ||  |>]
+        {
+            float activationValue = 0;
+
+            for (int n = 0; n < neurodes.Count; n++)
+                for (int v = 0; v < vectorCount; v++)
+                    activationValue += neurodes[n].Delta * weightMatrix[0][v] + biasVector[0][v];
+
+            delta = GetActivationValue(activationValue, type, useThershold);
+
+            if (delta != 0)
+            {
+                if (cube.Isrunning)
+                    delta = GetActivationValue(cube.Vector, type, useThershold);
+                else
+                    cube.Reset(delta);
+            }
+
+            if (cube.Isrunning)
+                cube.Update();
+        }
     }//Done
-
-
 
     float previesFitness;
 
@@ -569,8 +609,6 @@ else
             bias[v] = bias[v] + (.5f - (float)randomGen.NextDouble()) * magnitude;
         }
     }
-
-
 
     public void MergeInToThis(CNeurode partnerNeurode, MergeType type, System.Random randomGen)
     {
@@ -645,12 +683,11 @@ else
                 }
             }
         }
-        
 
- //      A(weightA weight) *> weight |   //weightA = A * stuff >_>
+
+        //      A(weightA weight) *> weight |   //weightA = A * stuff >_>
         //ClampBiases();
     }
-
 
     public void ClampBiases(CNeurode partnerNeurode)
     {
@@ -663,32 +700,32 @@ else
                         biasVector[s][v] = 1f;
                     else
                         if (biasVector[s][v] < -1f)
-                            biasVector[s][v] = -1f;
+                        biasVector[s][v] = -1f;
 
                     if (weightMatrix[s][v] > 1f)
                         weightMatrix[s][v] = 1f;
                     else
                         if (weightMatrix[s][v] < -1f)
-                            weightMatrix[s][v] = -1f;
+                        weightMatrix[s][v] = -1f;
                 }
         }
         else
+        {
+            for (int v = 0; v < vectorCount; v++)
             {
-                for (int v = 0; v < vectorCount; v++)
-                {
-                    if (bias[v] > 1f)
-                        bias[v] = 1f;
-                    else
-                        if (bias[v] < -1f)
-                            bias[v] = -1f;
+                if (bias[v] > 1f)
+                    bias[v] = 1f;
+                else
+                    if (bias[v] < -1f)
+                    bias[v] = -1f;
 
-                    if (weight[v] > 1f)
-                        weight[v] = 1f;
-                    else
-                        if (weight[v] < -1f)
-                            weight[v] = -1f;
-                }
+                if (weight[v] > 1f)
+                    weight[v] = 1f;
+                else
+                    if (weight[v] < -1f)
+                    weight[v] = -1f;
             }
+        }
     }
 
     public void MergeInToThis(CNeurode partnerNeurode, MergeType type)
@@ -704,22 +741,11 @@ else
     private int GetSwitchCount(int localType)
     {
         if (localType == 3 || localType == 4 || localType == 5 || localType == 12 || localType == 13 || localType == 14)
-            return 2; 
-                else
+            return 2;
+        else
                     if (localType == 6 || localType == 7 || localType == 8 || localType == 15 || localType == 16 || localType == 17)
-                        return 4; 
-                            else
-                                return -1;
+            return 4;
+        else
+            return -1;
     }      //Done
 }
-
-
-
-
-
-
-
-
-
-
-
