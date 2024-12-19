@@ -18,6 +18,9 @@ public class CNeurode
     private int switchCount = 0;
 
     private bool isMemoryNeurode;
+    private bool wasActive;
+    public float WasActive { get { return wasActive; } set { wasActive = value; } }
+
 
     public NeurodeType Type { get { return type; } set { type = value; } }
     public bool IsMemoryNeurode { get { return isMemoryNeurode; } set { isMemoryNeurode = value; } }
@@ -267,6 +270,127 @@ public class CNeurode
 
             if (delta != 0)
             {
+                if (cube.IsRunning)
+                    delta = GetActivationValue(cube.Vector, type, useThershold);
+                else
+                    cube.Reset(delta);
+            }
+
+            if (cube.IsRunning)
+                cube.Update();
+
+        }
+    }//Done
+
+    public void RunForward(CNeurode[][] network, bool useThershold, NeurodeType type)
+    {
+        if (localType == 0)
+        {
+            if (isMemoryNeurode)
+            {
+                float activationValue = 0;
+
+                for (int i = 0; i < network.GetLength(0); i++)
+                    for (int n = 0; n < network.GetLength(1); n++)
+                        for (int v = 0; v < vectorCount; v++)
+                            activationValue += network[i][n].delta * weight[v] + bias[v];
+
+                activationValue = GetActivationValue(activationValue, type, useThershold);
+
+                if (activationValue != 0)
+                    delta = activationValue;
+            }
+            else
+            {
+                float activationValue = 0;
+
+                for (int i = 0; i < network.GetLength(0); i++)
+                    for (int n = 0; n < network.GetLength(1); n++)
+                        for (int v = 0; v < vectorCount; v++)
+                            activationValue += network[i][n].delta * weight[v] + bias[v];
+
+                delta = GetActivationValue(activationValue, type, useThershold);
+            }
+        }
+
+        if (localType == 1)//                                                                                        [>|]
+        {
+            float activationValue = 0;
+
+            for (int i = 0; i < network.GetLength(0); i++)
+                for (int n = 0; n < network.GetLength(1); n++)
+                    for (int v = 0; v < vectorCount; v++)
+                        activationValue += network[i][n].delta * weight[v] + bias[v];
+
+            delta = GetActivationValue(activationValue, type, useThershold);
+        }
+
+        if (localType == 2)//                                                                                        [..]
+        {
+            float activationValue = 0;
+
+            for (int i = 0; i < network.GetLength(0); i++)
+                for (int n = 0; n < network.GetLength(1); n++)
+                    for (int v = 0; v < vectorCount; v++)
+                        activationValue += network[i][n].Delta * weightMatrix[0][v] + biasVector[0][v];
+
+            if (GetActivationValue(activationValue, type, useThershold) != 0)
+            {
+                for (int i = 0; i < network.GetLength(0); i++)
+                    for (int n = 0; n < network.GetLength(1); n++)
+                        for (int v = 0; v < vectorCount; v++)
+                            activationValue += network[i][n].Delta * weightMatrix[1][v] + biasVector[1][v];
+
+                delta = GetActivationValue(activationValue, type, useThershold);
+            }
+        }
+
+        if (localType == 3)//                                                                                        [>>  ||  |>]
+        {
+            float activationValue = 0;
+            wasActive = false;
+
+            for (int i = 0; i < network.GetLength(0); i++)
+                for (int n = 0; n < network.GetLength(1); n++)
+                    for (int v = 0; v < vectorCount; v++)
+                        if (network[i][n].WasActive)
+                            activationValue += 1;
+
+            delta = GetActivationValue(activationValue, type, useThershold);
+
+            if (delta != 0)
+            {
+                activationValue = 0;
+                wasActive = true;
+
+                for (int i = 0; i < network.GetLength(0); i++)
+                    for (int n = 0; n < network.GetLength(1); n++)
+                        for (int v = 0; v < vectorCount; v++)
+                            if (network[i][n].WasActive)
+                                activationValue += 1;
+
+                delta = GetActivationValue(activationValue, type, useThershold);
+
+            }
+        }
+
+        if (localType == 4)//                                                                                         [>>  ||  |>]
+        {
+            float activationValue = 0;
+            wasActive = false;
+
+            for (int i = 0; i < network.GetLength(0); i++)
+                for (int n = 0; n < network.GetLength(1); n++)
+                    for (int v = 0; v < vectorCount; v++)
+                        if(GetActivationValue(network[i][n].Delta * weightMatrix[0][v] + biasVector[0][v]))
+                            activationValue += 1;
+
+            delta = GetActivationValue(activationValue, type, useThershold);
+
+            if (delta != 0)
+            {
+                wasActive = true;
+
                 if (cube.IsRunning)
                     delta = GetActivationValue(cube.Vector, type, useThershold);
                 else
