@@ -36,7 +36,7 @@ public class CNeurode
     public float[][] BiasVector { get { return biasVector; } set { biasVector = value; } }
 
     private List<int> neighboors;
-    private List<Cneurode> depthNeurodes;
+    private List<CNeurode> depthNeurodes;
 
     private readonly float lowerThresholdReLu = 0.5f;
     private readonly float upperThresholdReLu = 1.5f;
@@ -47,7 +47,8 @@ public class CNeurode
     private readonly float lowerThresholdTanh = -0.5f;
     private readonly float upperThresholdTanh = 0.5f;
 
-
+    private LayerCube cube { get; set; }  = null;
+        
     /// <summary>
     /// <(O_O)>
     /// </summary>
@@ -343,14 +344,14 @@ public class CNeurode
 
             if (delta != 0)
             {
-                if (cube.Isrunning)
-                    delta = GetActivationValue(cube.magnitude, type, useThershold);
+                if (cube.IsRunning)
+                    delta = GetActivationValue(cube.Vector, type, useThershold);
                 else
                     cube.Reset(delta);
             }
 
-            if (cube.Isrunning)
-                cube.update();
+            if (cube.IsRunning)
+                cube.Update();
 
         }
     }//Done
@@ -437,22 +438,21 @@ public class CNeurode
         {
             float activationValue = 0;
 
-            for (int i = 0; i < network.GetLength(0); i++)
-                for (int n = 0; n < network.GetLength(1); n++)
-                    for (int v = 0; v < vectorCount; v++)
-                        activationValue += network[n].Delta * weightMatrix[0][v] + biasVector[0][v];
+            for (int n = 0; n < neurodes.Length; n++)
+                for (int v = 0; v < vectorCount; v++)
+                    activationValue += neurodes[n].Delta * weightMatrix[0][v] + biasVector[0][v];
 
             delta = GetActivationValue(activationValue, type, useThershold);
 
             if (delta != 0)
             {
-                if (cube.Isrunning)
+                if (cube.IsRunning)
                     delta = GetActivationValue(cube.Vector, type, useThershold);
                 else
                     cube.Reset(delta);
             }
 
-            if (cube.Isrunning)
+            if (cube.IsRunning)
                 cube.Update();
         }
 
@@ -548,13 +548,13 @@ public class CNeurode
 
             if (delta != 0)
             {
-                if (cube.Isrunning)
+                if (cube.IsRunning)
                     delta = GetActivationValue(cube.Vector, type, useThershold);
                 else
                     cube.Reset(delta);
             }
 
-            if (cube.Isrunning)
+            if (cube.IsRunning)
                 cube.Update();
         }
     }//Done
