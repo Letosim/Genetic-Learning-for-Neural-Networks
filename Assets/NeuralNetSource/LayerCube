@@ -7,7 +7,7 @@ public class LayerCube
     public bool IsRunning { get; set; } 
 
 
-    private float divident = 1f;
+    private float divident = 3f;
 
     private int vector = 0;
 
