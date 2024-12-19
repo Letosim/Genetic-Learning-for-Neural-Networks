@@ -401,7 +401,7 @@ public class CNeurode
                 cube.Update();
 
         }
-    }//Done
+    }
 
     public void RunForward(List<CNeurode> neurodes, bool useThershold)
     {
