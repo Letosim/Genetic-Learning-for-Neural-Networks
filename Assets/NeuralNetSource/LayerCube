@@ -15,9 +15,6 @@ class LayerCube
     private int positionB_x = 0;
     private int positionB_Y = 0;
 
-    //private float delta_A = 0;?
-    //private float delta_B = 0;?
-
     public Magnitude { get { return magnitude; }
 set { type = magnitude; } }
     
