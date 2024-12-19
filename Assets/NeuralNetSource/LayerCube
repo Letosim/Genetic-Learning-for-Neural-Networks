@@ -8,7 +8,7 @@ public class LayerCube
     
 
 
-    private float divident = 2f;
+    private int divident = 2f;
 
     private int vector = 0;
 
