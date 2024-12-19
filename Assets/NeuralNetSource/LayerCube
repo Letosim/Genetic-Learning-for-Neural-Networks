@@ -40,7 +40,7 @@ set { type = magnitude; } }
 public void Update()
 {
     UpdatePosition(positionA_x, positionA_y, stateA);
-    //??????? steps!?!?!?!?!?!?
+    
     UpdatePosition(positionB_x, positionB_y, stateA);
 
     if ((positionA_x == positionB_x) && (positionA_y == positionB_y))
@@ -55,7 +55,7 @@ public void Update()
         else
             stateB = true;
 
-        magnitude = (count + countB) / 2;//0 0 ? // distance time sleed??????
+        magnitude = (count + countB) / 2;
 
         count = (count + countB) / 2;
         countB = count;
