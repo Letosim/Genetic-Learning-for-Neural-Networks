@@ -1,76 +1,61 @@
-
 using System;
 
-class LayerCube
+public class LayerCube
 {
     public static int[,] primenumberGrid = new int[,] { { 2, 5 }, { 3, 7 } };
+    public int Vector { get { return vector; } set { vector = value; } }//Out for the activation value of a NeuralNetwork
 
-    private int magnitude = 0;
+    private int vector = 0;
 
     private int count = 0;
     private int positionA_x = 0;
-    private int positionB_y = 0;
+    private int positionA_y = 0;
+    private bool stateA = true;
 
     private int countB = 0;
     private int positionB_x = 0;
-    private int positionB_Y = 0;
+    private int positionB_y = 0;
+    private bool stateB = false;
 
-    public Magnitude { get { return magnitude; }
-set { type = magnitude; } }
-    
 
-    public void Reset(int magnitudue)
-{
-    positionA_x = 0;
-    positionA_y = 0;
-
-    positionB_x = 0;
-    positionB_Y = 0;
-
-    delta_A = 0;
-    delta_B = 0;
-
-    for (int i = 0; i < magnitude; i++)
-        Update();
-}
-
-public void Update()
-{
-    UpdatePosition(positionA_x, positionA_y, stateA);
-    
-    UpdatePosition(positionB_x, positionB_y, stateA);
-
-    if ((positionA_x == positionB_x) && (positionA_y == positionB_y))
+    public void Reset(int magnitude)//intial value from the upper layer ""(int)(neurodes[n].Delta * weightMatrix[0][v] + biasVector[0][v])  * 100;""
     {
-        if (stateA == true)
-            stateA = false;
-        else
-            stateA = true;
+        positionA_x = 0;
+        positionA_y = 0;
 
-        if (stateB == true)
-            stateB = false;
-        else
-            stateB = true;
+        positionB_x = 0;
+        positionB_y = 0;
 
-        magnitude = (count + countB) / 2;
-
-        count = (count + countB) / 2;
-        countB = count;
-        
-        magnitude++;
+        for (int i = 0; i < magnitude; i++)
+            Update();
     }
 
-    count++;
-    countB++;
-}
+    public void Update()
+    {
+        UpdatePosition(ref positionA_x,ref positionA_y, stateA);
+        UpdatePosition(ref positionB_x,ref positionB_y, stateB);
 
-public void UpdatePosition(int ref x, int ref y, bool ref state)
-{
+        if ((positionA_x == positionB_x) && (positionA_y == positionB_y))
+        {
+            stateA = !stateA;
+            stateB = !stateB;
 
-    if (state)
-        if (countB == primenumberGrid[positionB_x, positionB_y)
-            {
+            vector = (count + countB) / 2;
 
+            count = vector;
+            countB = vector;
+
+            vector++;
+        }
+
+        count++;
+        countB++;
+    }
+
+    public void UpdatePosition(ref int x, ref int y, bool reverse)
+    {
+        if (reverse)
+        {
             if (x == 0 && y == 0)
                 y = 1;
 
@@ -82,13 +67,9 @@ public void UpdatePosition(int ref x, int ref y, bool ref state)
 
             if (x == 1 && y == 0)
                 x = 0;
-
-            countB = 0;
         }
         else
-            if (count == primenumberGrid[positionA_x, positionA_y)
-                {
-
+        {
             if (x == 0 && y == 0)
                 x = 1;
 
@@ -103,24 +84,11 @@ public void UpdatePosition(int ref x, int ref y, bool ref state)
 
             count = 0;
         }
+
+        if (count == primenumberGrid[positionA_x, positionA_y])
+                count = 0;
+
+        if (countB == primenumberGrid[positionA_x, positionA_y])
+                countB = 0;
+    }
 }
-
-
-//
-//            
-//           11-----13
-//           /      /|   
-//          3------7 |- out = ?
-//          |      | |
-// in = 47 -| time | 21       
-//          |      |/ 
-//          2------5        //3D max space   
-//
-//
-
-
-
-
-//if((positionA_x == positionB_x) && (positionA_y == positionB_y))
-//magnitude += (delta_A + delta_B);
-//Hmmm no big spoilers pls chatGPT
