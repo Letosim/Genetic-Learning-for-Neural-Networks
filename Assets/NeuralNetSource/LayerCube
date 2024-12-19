@@ -3,7 +3,11 @@ using System;
 public class LayerCube
 {
     public static readonly int[,] primenumberGrid = new int[,] { { 2, 5 }, { 3, 7 } };
-    public int Vector { get { return vector; } set { vector = value; } }//Out for the activation value of a NeuralNetwork
+    public float Vector { get { return (float)vector / divident; } set { return; } }//Out for the activation value of a NeuralNetwork
+    public bool IsRunning { get; set; } 
+
+
+    private float divident = 1f;
 
     private int vector = 0;
 
@@ -17,7 +21,9 @@ public class LayerCube
     private int positionB_y = 0;
     private bool stateB = false;
 
-    public void Reset(int magnitude)//intial value from the upper layer ""(int)(neurodes[n].Delta * weightMatrix[0][v] + biasVector[0][v])  * 100;""
+
+
+    public void Reset(float magnitude)//intial value from the upper layer ""(int)(neurodes[n].Delta * weightMatrix[0][v] + biasVector[0][v])  * 100;""
     {
         positionA_x = 0;
         positionA_y = 0;
@@ -25,7 +31,7 @@ public class LayerCube
         positionB_x = 0;
         positionB_y = 0;
 
-        for (int i = 0; i < magnitude; i++)
+        for (int i = 0; i < (int)(magnitude * 100f); i++)
             Update();
     }
 
@@ -77,6 +83,7 @@ public class LayerCube
 
             if (x == 1 && y == 1)
                 y = 0;
+
         }
 
         if (count == primenumberGrid[positionA_x, positionA_y])
