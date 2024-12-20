@@ -443,6 +443,142 @@ public class CNeurode
         }
     }
 
+ public void RunForward( bool useThershold, NeurodeType type)
+    {
+        if (localType == 5)
+        {
+            if (isMemoryNeurode)//outputlayer out > in
+            {
+                float activationValue = 0;
+                wasActive = false;
+
+                for (int i = 0; i < network.GetLength(0); i++)
+                    for (int n = 0; n < network.GetLength(1); n++)
+                        if (network[i][n].WasActive[0])
+                            activationValue += 1;
+
+                activationValue = GetActivationValue(activationValue, type, useThershold);
+
+                if (activationValue != 0)
+                    delta = activationValue;
+            }
+            else
+            {
+                float activationValue = 0;
+
+                for (int i = 0; i < network.GetLength(0); i++)
+                    for (int n = 0; n < network.GetLength(1); n++)
+                        if (network[i][n].WasActive[0])
+                            activationValue += 1;
+
+                 *
+                 |
+Neighbors.Add()-----*
+                 |
+                 *
+// input|> this.run.neighbours.run... |> out
+   for(int i = 0; i < neighbours.Count; i++)
+   { 
+     delta += neighbours_.[i].delta 
+       neighbours_.CalculateDelta();
+   }
+
+
+                delta = GetActivationValue(activationValue, type, useThershold);
+            }
+        }
+
+        if (localType == 1)//                                                                                        [>|]
+        {
+            float activationValue = 0;
+            wasActive = false;
+
+            for (int i = 0; i < network.GetLength(0); i++)
+                for (int n = 0; n < network.GetLength(1); n++)
+                        if (network[indices[i]][indices[n]].WasActive[0])
+                            activationValue += 1;
+
+            delta = GetActivationValue(activationValue, type, useThershold);
+        }
+
+        if (localType == 2)//                                                                                        [..]
+        {
+            float activationValue = 0;
+            wasActive = false;
+
+            for (int i = 0; i < network.GetLength(0); i++)
+                for (int n = 0; n < network.GetLength(1); n++)
+                    if (network[i][n].WasActive[0])
+                        activationValue += 1;
+            
+            if (GetActivationValue(activationValue, type, useThershold) != 0)
+            {
+                for (int i = 0; i < network.GetLength(0); i++)
+                    for (int n = 0; n < network.GetLength(1); n++)
+                        if (network[i][n].WasActive[1])
+                            activationValue += 1;
+
+                delta = GetActivationValue(activationValue, type, useThershold);
+            }
+        }
+
+        if (localType == 3)//                                                                                        [>>  ||  |>]
+        {
+            float activationValue = 0;
+            wasActive = false;
+
+            for (int i = 0; i < network.GetLength(0); i++)
+                for (int n = 0; n < network.GetLength(1); n++)
+                    if (network[i][n].WasActive[0])
+                        activationValue += 1;
+
+            delta = GetActivationValue(activationValue, type, useThershold);
+
+            if (delta != 0)
+            {
+                activationValue = 0;
+                wasActive = true;
+
+                for (int i = 0; i < network.GetLength(0); i++)
+                    for (int n = 0; n < network.GetLength(1); n++)
+                        if (network[i][n].WasActive[1])
+                            activationValue += 1;
+
+                delta = GetActivationValue(activationValue, type, useThershold);
+
+            }
+        }
+        
+        if (localType == 4)//                                                                                         [>>  ||  |>]
+        {
+            float activationValue = 0;
+            wasActive = false;
+
+            for (int i = 0; i < network.GetLength(0); i++)
+                for (int n = 0; n < network.GetLength(1); n++)
+                        if (network[i][n].WasActive[0])
+                            activationValue += 1;
+
+            delta = GetActivationValue(activationValue, type, useThershold);
+
+            if (delta != 0)
+            {
+                wasActive = true;
+
+                if (cube.IsRunning)
+                    delta = GetActivationValue(cube.Vector, type, useThershold);
+                else
+                    cube.Reset(delta);
+            }
+
+            if (cube.IsRunning)
+                cube.Update();
+
+        }
+    }
+
+
+
     public void RunForward(List<CNeurode> neurodes, bool useThershold)
     {
         if (localType == 0)
