@@ -486,7 +486,7 @@ float activationVue = 0;
       for(int v = 0; v < vectorCount; v++)
 { 
      activationVue += neighbours_.[i].delta * weightMatrix[0][v] + weightMatrix[0][v];
-     neighbours_.CalculateDelta();// Den Mist rubicube ich! >_> Hoffentlich :P
+     neighbours_.CalculateDelta();//[][] + List vector2 hmm
 }
 delta = Getactivationvalue(delta, type, useThershold);
 
