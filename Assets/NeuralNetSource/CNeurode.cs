@@ -483,6 +483,42 @@ public class CNeurode
 float activationVue = 0;
 
  for(int i = 0; i < neighbours.Count; i++)
+      for(int v = 0; v < vectorCount; v++)
+{ 
+     activationVue += neighbours_.[i].delta * weightMatrix[0][v] + weightMatrix[0][v];
+     neighbours_.CalculateDelta();// Den Mist rubicube ich! >_> Hoffentlich :P
+}
+delta = Getactivationvalue(delta, type, useThershold);
+
+if(delta != 0)
+{
+float activationVue = 0;
+
+for(int i = 0; i < neighbours.Count; i++)
+      for(int v = 0; v < vectorCount; v++)
+     activationVue += neighbours_.[i].delta * weightMatrix[1][v] + weightMatrix[1][v];
+       neighbours_.CalculateDelta();
+
+delta = Getactivationvalue(delta, type, useThershold);
+}
+}
+}
+
+
+
+             
+//                 
+//                 |          
+//Neighbors.Add()-----<
+//                 |    
+//                 ^
+
+
+// input|> this.run.neighbours.run... |> out
+{  
+float activationVue = 0;
+
+ for(int i = 0; i < neighbours.Count; i++)
       for(int v = 0; v < vectorCount; v++) 
      activationVue += neighbours_.[i].delta * weightMatrix[0][v] + weightMatrix[0][v];
        neighbours_.CalculateDelta();
@@ -502,6 +538,15 @@ delta = Getactivationvalue(delta, type, useThershold);
 }
 }
 }
+
+
+
+
+
+
+
+
+
                 delta = GetActivationValue(activationValue, type, useThershold);
             }
         }
